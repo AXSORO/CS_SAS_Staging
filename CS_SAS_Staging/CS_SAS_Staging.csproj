@@ -7,6 +7,8 @@
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
     <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>WinObj.ico</ApplicationIcon>
+    <AssemblyName>SAS Configurator</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,6 +16,10 @@
     <None Remove="C:\Users\shane.schou\.nuget\packages\microsoft.powershell.sdk\7.4.0\contentFiles\any\any\runtimes\unix\lib\net8.0\Modules\Microsoft.PowerShell.Management\Microsoft.PowerShell.Management.psd1" />
     <None Remove="C:\Users\shane.schou\.nuget\packages\microsoft.powershell.sdk\7.4.0\contentFiles\any\any\runtimes\unix\lib\net8.0\Modules\Microsoft.PowerShell.Security\Microsoft.PowerShell.Security.psd1" />
     <None Remove="C:\Users\shane.schou\.nuget\packages\microsoft.powershell.sdk\7.4.0\contentFiles\any\any\runtimes\unix\lib\net8.0\Modules\Microsoft.PowerShell.Utility\Microsoft.PowerShell.Utility.psd1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="WinObj.ico" />
   </ItemGroup>
 
   <ItemGroup>
