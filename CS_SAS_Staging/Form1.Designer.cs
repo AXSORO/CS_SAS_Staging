@@ -89,7 +89,7 @@
             sep2 = new Panel();
             sep1 = new Panel();
             newHostname = new Button();
-            textBox1 = new TextBox();
+            nHostname = new TextBox();
             newHsLabel = new Label();
             currentHSLabel = new Label();
             tabAppMenu = new TabPage();
@@ -300,7 +300,7 @@
             tabNwMenu.Controls.Add(sep2);
             tabNwMenu.Controls.Add(sep1);
             tabNwMenu.Controls.Add(newHostname);
-            tabNwMenu.Controls.Add(textBox1);
+            tabNwMenu.Controls.Add(nHostname);
             tabNwMenu.Controls.Add(newHsLabel);
             tabNwMenu.Controls.Add(currentHSLabel);
             tabNwMenu.Location = new Point(4, 24);
@@ -630,13 +630,14 @@
             newHostname.TabIndex = 3;
             newHostname.Text = "Apply";
             newHostname.UseVisualStyleBackColor = true;
+            newHostname.Click += newHostname_Click;
             // 
-            // textBox1
+            // nHostname
             // 
-            textBox1.Location = new Point(6, 47);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(149, 23);
-            textBox1.TabIndex = 2;
+            nHostname.Location = new Point(6, 47);
+            nHostname.Name = "nHostname";
+            nHostname.Size = new Size(149, 23);
+            nHostname.TabIndex = 2;
             // 
             // newHsLabel
             // 
@@ -752,7 +753,7 @@
         private Label psLogWindow;
         private TabPage tabWinMenu;
         private Label currentHSLabel;
-        private TextBox textBox1;
+        private TextBox nHostname;
         private Label newHsLabel;
         private Panel sep1;
         private Button newHostname;

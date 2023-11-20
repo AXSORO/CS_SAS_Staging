@@ -8,6 +8,9 @@ using NetFwTypeLib;
 using System.Collections.Generic;
 using static CS_SAS_Staging.NetworkAdapter;
 using System.Net.Sockets;
+using Microsoft.VisualBasic.Devices;
+using System.Management;
+using System.Runtime.InteropServices;
 
 namespace CS_SAS_Staging
 {
@@ -27,8 +30,12 @@ namespace CS_SAS_Staging
         private async void Form1_Load(object sender, EventArgs e)
         {
             // more useless but cool stuff to be put into the log 
-            await Task.Delay(500);
+            await Task.Delay(200);
+            LogToCsLog("VisualBasic Scripting Initalized.\n");
+            await Task.Delay(250);
             LogToCsLog("System.Diagnostics Library Loaded\n");
+            await Task.Delay(100);
+            LogToCsLog("InteropServices Library Loaded.\n");
             await Task.Delay(250);
             LogToCsLog("System.Net.Sockets Library Loaded\n");
             await Task.Delay(250);
@@ -67,8 +74,6 @@ namespace CS_SAS_Staging
             QueryFirewallStatus();
         }
 
-        // This code relates to logging and querying mostly for the first few blocks.
-        // Hostname Query Function
         private void QueryMachineInfo()
         {
             try
@@ -86,8 +91,6 @@ namespace CS_SAS_Staging
                 LogToCsLog($"Error querying machine hostname: {ex.Message}\n");
             }
         }
-
-        // Query Network Adapters
 
         private void QueryNetworkAdapters()
         {
@@ -129,8 +132,6 @@ namespace CS_SAS_Staging
             }
         }
 
-        // Query Firewall Status Function
-
         private (string Status, System.Drawing.Color StatusColor) QueryFirewallStatus(NET_FW_PROFILE_TYPE2_ profileType)
         {
             try
@@ -154,6 +155,7 @@ namespace CS_SAS_Staging
                 return ("Error", System.Drawing.Color.Red);
             }
         }
+
         private void QueryFirewallStatus()
         {
             try
@@ -182,7 +184,7 @@ namespace CS_SAS_Staging
                 LogToCsLog($"Error querying firewall statuses: {ex.Message}");
             }
         }
-        // Logging Functions for querying.
+
         private void LogToCsLog(string logText)
         {
             // Append the log text to the "csLog" rich text box
@@ -205,6 +207,7 @@ namespace CS_SAS_Staging
                 }
             }
         }
+
         private void DisplayAdapterInfo(NetworkAdapter adapter)
         {
             try
@@ -233,7 +236,7 @@ namespace CS_SAS_Staging
                 LogToCsLog($"Error displaying adapter information: {ex.Message} \n");
             }
         }
-        // Helper methods to get adapter information
+
         private string GetFirstIPv4Address(NetworkInterface adapter)
         {
             var ipv4Addresses = adapter.GetIPProperties().UnicastAddresses
@@ -279,6 +282,7 @@ namespace CS_SAS_Staging
             // Skip the first DNS server to get the secondary one
             return dnsServers.Skip(1).FirstOrDefault() ?? "N/A";
         }
+
         private void toolStripStatusLabel1_Click(object sender, EventArgs e)
         {
 
@@ -323,10 +327,75 @@ namespace CS_SAS_Staging
             nwAdapt.Items.Clear();
             ReloadQueries();
         }
+
         private void csLogClear_Click(object sender, EventArgs e)
         {
             csLog.Clear();
         }
+
+        private void newHostname_Click(object sender, EventArgs e)
+        {
+            // Get the new hostname from the textbox
+            string newHostname = nHostname.Text.Trim();
+
+            // Check if the new hostname is not empty
+            if (!string.IsNullOrEmpty(newHostname))
+            {
+                try
+                {
+                    // Build the WMIC command to change the hostname
+                    string command = $"wmic computersystem where caption=\"%COMPUTERNAME%\" call rename \"{newHostname}\"";
+
+                    // Start a process to execute the command
+                    Process process = new Process();
+                    ProcessStartInfo startInfo = new ProcessStartInfo
+                    {
+                        FileName = "cmd.exe",
+                        RedirectStandardInput = true,
+                        RedirectStandardOutput = true,
+                        UseShellExecute = false,
+                        CreateNoWindow = true
+                    };
+
+                    process.StartInfo = startInfo;
+                    process.Start();
+
+                    // Pass the command to the command prompt
+                    process.StandardInput.WriteLine(command);
+                    process.StandardInput.WriteLine("exit");
+
+                    // Wait for the process to finish
+                    process.WaitForExit();
+
+                    // Update the UI with the new hostname
+                    cHostName.Text = newHostname;
+
+                    // Log the command and its output
+                    LogToCsLog($"Command: Set machine hostname to {newHostname}\nOutput: Success");
+
+                    // Ask the user if they want to reboot
+                    DialogResult result = MessageBox.Show("Hostname changed successfully. Do you want to reboot now?", "Hostname Changed", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                    if (result == DialogResult.Yes)
+                    {
+                        // Reboot the machine
+                        Process.Start("shutdown", "/r /t 0");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Handle exceptions and log errors
+                    LogToCsLog($"Error setting machine hostname: {ex.Message}");
+                }
+            }
+            else
+            {
+                // Display an error message if the new hostname is empty
+                MessageBox.Show("Please enter a valid hostname.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
 
     }
 }
