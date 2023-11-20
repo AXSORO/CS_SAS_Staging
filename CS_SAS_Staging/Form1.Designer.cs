@@ -497,7 +497,7 @@
             resetNwSet.TabIndex = 19;
             resetNwSet.Text = "Reset";
             resetNwSet.UseVisualStyleBackColor = true;
-            resetNwSet.Click += resetNwSet_Click;
+            resetNwSet.Click += resetNwSet_click;
             // 
             // wuConnStatus
             // 

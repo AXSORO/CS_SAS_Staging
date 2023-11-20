@@ -92,8 +92,7 @@ namespace CS_SAS_Staging
                 LogToCsLog($"Error querying machine hostname: {ex.Message}\n");
             }
         }
-        // Action for listing network adapters and pre-storing their IP information for display
-        // Method is to be depreciated. This does not allow the Netsh command to call the proper interface ID's. 
+        // Action for listing network adapters and pre-storing their IP information for display / changes using NetSH 
         private void QueryNetworkAdapters()
         {
             try
@@ -109,7 +108,7 @@ namespace CS_SAS_Staging
                         NetworkAdapter networkAdapter = new NetworkAdapter
                         {
                             Name = adapter.Description,
-                            ActName = adapter.Name,
+                            ActName = adapter.Name, // Added to help support the NetSh commands, now the selected adapter internal name will display under the Textbox. 
                             IPAddress = GetFirstIPv4Address(adapter),
                             SubnetMask = GetSubnetMask(adapter),
                             DefaultGateway = GetDefaultGateway(adapter),
@@ -134,7 +133,7 @@ namespace CS_SAS_Staging
                 LogToCsLog($"Error listing network adapters: {ex.Message} \n");
             }
         }
-        //New process for obtaining network adapter information. 
+        // Firewall profile gathering 
         private (string Status, System.Drawing.Color StatusColor) QueryFirewallStatus(NET_FW_PROFILE_TYPE2_ profileType)
         {
             try
@@ -303,16 +302,6 @@ namespace CS_SAS_Staging
         }
         // WIP or Unused
         private void newHsLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-        // WIP or Unused
-        private void tabNwMenu_Click(object sender, EventArgs e)
-        {
-
-        }
-        // WIP or Unused
-        private void resetNwSet_Click(object sender, EventArgs e)
         {
 
         }
@@ -575,6 +564,31 @@ namespace CS_SAS_Staging
             {
                 // Log errors for failed commands
                 LogToCsLog($"{actionDescription}:\nCommand: {command}\nOutput: {ex.Message}");
+            }
+        }
+        // Resets the network configuration text boxes with their last queried data
+        private void resetNwSet_click (object sender, EventArgs e)
+        {
+            if (nwAdapt.SelectedItem != null)
+            {
+                // Ensure the selected item is of type NetworkAdapter
+                if (nwAdapt.SelectedItem is NetworkAdapter selectedAdapter)
+                {
+                    // Update the textboxes with the selected adapter's configuration
+                    ipAddr.Text = selectedAdapter.IPAddress ?? "N/A";
+                    snMask.Text = selectedAdapter.SubnetMask ?? "N/A";
+                    deGw.Text = selectedAdapter.DefaultGateway ?? "N/A";
+                    nwDns1.Text = selectedAdapter.PrimaryDNS ?? "N/A";
+                    nwDns2.Text = selectedAdapter.SecondaryDNS ?? "N/A";
+
+                    // Log the command and its output
+                    LogToCsLog($"Reset: {selectedAdapter.Name} Configuration\n");
+                }
+            }
+            else
+            {
+                // Display an error message if no adapter is selected
+                MessageBox.Show("Please select a network adapter.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
