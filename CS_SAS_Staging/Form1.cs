@@ -541,7 +541,7 @@ namespace CS_SAS_Staging
                     RedirectStandardInput = true,
                     RedirectStandardOutput = true,
                     UseShellExecute = false,
-                    CreateNoWindow = false
+                    CreateNoWindow = true
                 };
 
                 using (Process process = new Process())
@@ -551,7 +551,7 @@ namespace CS_SAS_Staging
 
                     // Pass the command to the command prompt
                     process.StandardInput.WriteLine(command);
-                    // process.StandardInput.WriteLine("exit");
+                    process.StandardInput.WriteLine("exit");
 
                     // Wait for the process to finish
                     process.WaitForExit();
