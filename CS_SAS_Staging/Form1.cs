@@ -334,7 +334,7 @@ namespace CS_SAS_Staging
                 DisableFirewall();
             }
         }
-        // When the "enable" radio button is selected when the Set button is clicked, run this function
+        // When the "enable" radio button is selected when the Set button is clicked, run this function - Calls CMD then PowerShell
         private void EnableFirewall()
         {
             try
@@ -372,7 +372,7 @@ namespace CS_SAS_Staging
                 LogToCsLog($"Error enabling firewall: {ex.Message}");
             }
         }
-        // When the "disable" radio button is selected when the Set button is clicked, run this function
+        // When the "disable" radio button is selected when the Set button is clicked, run this function - Calls CMD then PowerShell
         private void DisableFirewall()
         {
             try
