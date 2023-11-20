@@ -598,5 +598,46 @@ namespace CS_SAS_Staging
                 MessageBox.Show("Please select a network adapter.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        // testCurrentNwSet button to trigger a command that natively uses C# to run a ping test 
+        private void testCurrentNwSet_Click(object sender, EventArgs e)
+        {
+            LogToCsLog("\nPing Test Complete\n");
+            // Set the host names for ping tests
+            string googleHostName = "www.google.com";
+            string microsoftCatalogHostName = "catalog.update.microsoft.com";
+
+            // Perform ping tests
+            bool googlePingSuccess = PerformPingTest(googleHostName);
+            bool microsoftCatalogPingSuccess = PerformPingTest(microsoftCatalogHostName);
+
+            // Update UI based on ping test results
+
+            UpdatePingTestResultLabel(extConnStatus, googlePingSuccess);
+            UpdatePingTestResultLabel(wuConnStatus, microsoftCatalogPingSuccess, "Catalog OK");
+        }
+        // Action of the ping test itself
+        private bool PerformPingTest(string hostName)
+        {
+            try
+            {
+                using (Ping ping = new Ping())
+                {
+                    PingReply reply = ping.Send(hostName);
+                    return reply.Status == IPStatus.Success;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogToCsLog($"Error performing ping test for {hostName}: {ex.Message}");
+                return false;
+            }
+
+        }
+        // Action of taking the result of the ping test, and printing it to the appropriate labels 
+        private void UpdatePingTestResultLabel(Label label, bool success, string successText = "Success")
+        {
+            label.Text = success ? successText : "Failure";
+            label.ForeColor = success ? Color.Green : Color.Red;
+        }
     }
 }

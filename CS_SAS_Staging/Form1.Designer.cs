@@ -453,6 +453,7 @@
             testCurrentNwSet.TabIndex = 27;
             testCurrentNwSet.Text = "Test";
             testCurrentNwSet.UseVisualStyleBackColor = true;
+            testCurrentNwSet.Click += testCurrentNwSet_Click;
             // 
             // nwDns2
             // 
@@ -502,7 +503,7 @@
             // wuConnStatus
             // 
             wuConnStatus.AutoSize = true;
-            wuConnStatus.Location = new Point(438, 234);
+            wuConnStatus.Location = new Point(428, 234);
             wuConnStatus.Name = "wuConnStatus";
             wuConnStatus.Size = new Size(29, 15);
             wuConnStatus.TabIndex = 18;
@@ -511,7 +512,7 @@
             // extConnStatus
             // 
             extConnStatus.AutoSize = true;
-            extConnStatus.Location = new Point(438, 215);
+            extConnStatus.Location = new Point(428, 215);
             extConnStatus.Name = "extConnStatus";
             extConnStatus.Size = new Size(29, 15);
             extConnStatus.TabIndex = 17;
@@ -522,9 +523,9 @@
             wuConnResultLabel.AutoSize = true;
             wuConnResultLabel.Location = new Point(253, 234);
             wuConnResultLabel.Name = "wuConnResultLabel";
-            wuConnResultLabel.Size = new Size(165, 15);
+            wuConnResultLabel.Size = new Size(141, 15);
             wuConnResultLabel.TabIndex = 16;
-            wuConnResultLabel.Text = "Windows Update Connection:";
+            wuConnResultLabel.Text = "Windows Update Catalog";
             // 
             // extConnResultLabel
             // 
