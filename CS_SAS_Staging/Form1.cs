@@ -93,6 +93,7 @@ namespace CS_SAS_Staging
             }
         }
         // Action for listing network adapters and pre-storing their IP information for display
+        // Method is to be depreciated. This does not allow the Netsh command to call the proper interface ID's. 
         private void QueryNetworkAdapters()
         {
             try
@@ -108,6 +109,7 @@ namespace CS_SAS_Staging
                         NetworkAdapter networkAdapter = new NetworkAdapter
                         {
                             Name = adapter.Description,
+                            ActName = adapter.Name,
                             IPAddress = GetFirstIPv4Address(adapter),
                             SubnetMask = GetSubnetMask(adapter),
                             DefaultGateway = GetDefaultGateway(adapter),
@@ -132,7 +134,7 @@ namespace CS_SAS_Staging
                 LogToCsLog($"Error listing network adapters: {ex.Message} \n");
             }
         }
-        // Assisting with calling / display of firewall status
+        //New process for obtaining network adapter information. 
         private (string Status, System.Drawing.Color StatusColor) QueryFirewallStatus(NET_FW_PROFILE_TYPE2_ profileType)
         {
             try
@@ -202,7 +204,7 @@ namespace CS_SAS_Staging
                 if (nwAdapt.SelectedItem is NetworkAdapter selectedAdapter)
                 {
                     // Update the "selAdapt" label with the selected adapter's name
-                    selAdapt.Text = $"{selectedAdapter.Name}";
+                    selAdapt.Text = $"Internal Name: {selectedAdapter.ActName}";
 
                     // Display the adapter's information
                     DisplayAdapterInfo(selectedAdapter);
@@ -486,8 +488,94 @@ namespace CS_SAS_Staging
                 MessageBox.Show("Please enter a valid hostname.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        // Action to send variables in the address textboxes to the ApplyNetworkSettings command 
+        private void applyNewNwSettings_Click(object sender, EventArgs e)
+        {
+            // Check if any item is selected in the ListBox
+            if (nwAdapt.SelectedItem != null)
+            {
+                // Ensure the selected item is of type NetworkAdapter
+                if (nwAdapt.SelectedItem is NetworkAdapter selectedAdapter)
+                {
+                    try
+                    {
+                        // Get the new network settings from the text boxes
+                        string newIPAddress = ipAddr.Text.Trim();
+                        string newSubnetMask = snMask.Text.Trim();
+                        string newDefaultGateway = deGw.Text.Trim();
+                        string newPrimaryDNS = nwDns1.Text.Trim();
+                        string newSecondaryDNS = nwDns2.Text.Trim();
 
+                        // Apply the new network settings to the selected adapter
+                        ApplyNetworkSettings(selectedAdapter, newIPAddress, newSubnetMask, newDefaultGateway, newPrimaryDNS, newSecondaryDNS);
 
+                        // Log the command and its output
+                        LogToCsLog($"Command: Set network settings for {selectedAdapter.Name}\nOutput: Success\n");
+                    }
+                    catch (Exception ex)
+                    {
+                        // Handle exceptions and log errors
+                        LogToCsLog($"Error setting network settings: {ex.Message}\n");
+                    }
+                }
+            }
+        }
+        // Building and parsing the data to be sent to the Execute command 
+        private void ApplyNetworkSettings(NetworkAdapter adapter, string ipAddress, string subnetMask, string defaultGateway, string primaryDNS, string secondaryDNS)
+        {
+            try
+            {
+                // Build netsh commands
+                string setIPAddressCommand = $"netsh interface ipv4 set address name=\"{adapter.ActName}\" static {ipAddress} {subnetMask} {defaultGateway} 1";
+                string setDNSCommand = $"netsh interface ipv4 set dns name=\"{adapter.ActName}\" static {primaryDNS} validate=no";
+                string addDNSCommand = $"netsh interface ipv4 add dns name=\"{adapter.ActName}\" {secondaryDNS} index=2 validate=no";
 
+                // Execute netsh commands one by one
+                ExecuteNetshCommand(setIPAddressCommand, "Setting IP Address");
+                ExecuteNetshCommand(setDNSCommand, "Setting Primary DNS");
+                ExecuteNetshCommand(addDNSCommand, "Adding Secondary DNS");
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions and log errors
+                LogToCsLog($"Error applying network settings: {ex.Message}");
+            }
+        }
+        // Executing the network changes defined in applyNewNwSettings function, after they have been parsed and built by ApplyNetworkSettings
+        private void ExecuteNetshCommand(string command, string actionDescription)
+        {
+            try
+            {
+                ProcessStartInfo startInfo = new ProcessStartInfo
+                {
+                    FileName = "cmd.exe",
+                    RedirectStandardInput = true,
+                    RedirectStandardOutput = true,
+                    UseShellExecute = false,
+                    CreateNoWindow = false
+                };
+
+                using (Process process = new Process())
+                {
+                    process.StartInfo = startInfo;
+                    process.Start();
+
+                    // Pass the command to the command prompt
+                    process.StandardInput.WriteLine(command);
+                    // process.StandardInput.WriteLine("exit");
+
+                    // Wait for the process to finish
+                    process.WaitForExit();
+
+                    // Log the command and its output
+                    LogToCsLog($"{actionDescription}:\nCommand: {command}\nOutput: Success");
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log errors for failed commands
+                LogToCsLog($"{actionDescription}:\nCommand: {command}\nOutput: {ex.Message}");
+            }
+        }
     }
 }

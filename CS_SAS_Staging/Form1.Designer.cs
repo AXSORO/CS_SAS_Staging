@@ -443,6 +443,7 @@
             applyNewNwSettings.TabIndex = 28;
             applyNewNwSettings.Text = "Set";
             applyNewNwSettings.UseVisualStyleBackColor = true;
+            applyNewNwSettings.Click += applyNewNwSettings_Click;
             // 
             // testCurrentNwSet
             // 
