@@ -520,9 +520,16 @@ namespace CS_SAS_Staging
                 string addDNSCommand = $"netsh interface ipv4 add dns name=\"{adapter.ActName}\" {secondaryDNS} index=2 validate=no";
 
                 // Execute netsh commands one by one
+                csLog.Clear();
+                LogToCsLog($"Applying new configuration to {adapter.Name}\n \n");
                 ExecuteNetshCommand(setIPAddressCommand, "Setting IP Address");
+                LogToCsLog($"IP address has been set to {ipAddress}\n");
+                LogToCsLog($"Subnet Mask has been set to {subnetMask} \n");
+                LogToCsLog($"Gateway has been set to {defaultGateway} \n");
                 ExecuteNetshCommand(setDNSCommand, "Setting Primary DNS");
+                LogToCsLog($"Primary DNS Server has been set to {primaryDNS} \n");
                 ExecuteNetshCommand(addDNSCommand, "Adding Secondary DNS");
+                LogToCsLog($"Secondary DNS Server has been set to {secondaryDNS}\n \n");
             }
             catch (Exception ex)
             {
@@ -557,7 +564,7 @@ namespace CS_SAS_Staging
                     process.WaitForExit();
 
                     // Log the command and its output
-                    LogToCsLog($"{actionDescription}:\nCommand: {command}\nOutput: Success");
+                    // LogToCsLog($"{actionDescription}:\nCommand: {command}\n"); // to avoid redundant errors, making room for more consise action logging
                 }
             }
             catch (Exception ex)
