@@ -1,21 +1,22 @@
-// including dependencies 
+// Dependencies being called 
 using System;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Net.NetworkInformation;
-using System.Windows.Forms;
-using NetFwTypeLib;
+using System.Diagnostics; // Assisting with system management 
+using System.Net.NetworkInformation; // Assisting with network information queries 
+using System.Windows.Forms; // Calling for WinForms designer and assets
+using NetFwTypeLib; // FirewallAPI for assistance of querying and grabbing info of the firewall 
 using System.Collections.Generic;
-using static CS_SAS_Staging.NetworkAdapter;
-using System.Net.Sockets;
-using Microsoft.VisualBasic.Devices;
-using System.Management;
-using System.Runtime.InteropServices;
+using System.Net.Sockets; // Assisting with the querying of current networking information 
+using Microsoft.VisualBasic.Devices; // Assisting with calling Batch/CMD commands
+using System.Management; // Assisting with system changes 
+using System.Runtime.InteropServices; // Assisting with system management cases
+using static CS_SAS_Staging.NetworkAdapter; // This is calling a secondary class I created to help parsing of the Network Adapter information 
 
+//Start main application
 namespace CS_SAS_Staging
 {
     public partial class Form1 : Form
-    {
+    {   // Appplication init
         public Form1()
         {
             InitializeComponent();
@@ -26,7 +27,7 @@ namespace CS_SAS_Staging
             // Display selected adapter below the listBox
             nwAdapt.SelectedIndexChanged += nwAdapt_SelectedIndexChanged;
         }
-
+        // Log init - the text being displayed is for fun and for show
         private async void Form1_Load(object sender, EventArgs e)
         {
             // more useless but cool stuff to be put into the log 
@@ -53,7 +54,7 @@ namespace CS_SAS_Staging
             // Seperate function to run queries after launch, makes it open much faster
             RunQueries();
         }
-
+        // Action for re-running queries when the associated button is clicked (resetQuery_Click action)
         private async void ReloadQueries()
         {
             csLog.Clear();
@@ -65,7 +66,7 @@ namespace CS_SAS_Staging
             await Task.Delay(100);
             RunQueries();
         }
-
+        // Run queries on hardware for main page
         private void RunQueries()
         {
             csLog.Clear();
@@ -73,7 +74,7 @@ namespace CS_SAS_Staging
             QueryNetworkAdapters();
             QueryFirewallStatus();
         }
-
+        // Action for pulling machine hostname and displaying it in appropriate label
         private void QueryMachineInfo()
         {
             try
@@ -91,7 +92,7 @@ namespace CS_SAS_Staging
                 LogToCsLog($"Error querying machine hostname: {ex.Message}\n");
             }
         }
-
+        // Action for listing network adapters and pre-storing their IP information for display
         private void QueryNetworkAdapters()
         {
             try
@@ -131,7 +132,7 @@ namespace CS_SAS_Staging
                 LogToCsLog($"Error listing network adapters: {ex.Message} \n");
             }
         }
-
+        // Assisting with calling / display of firewall status
         private (string Status, System.Drawing.Color StatusColor) QueryFirewallStatus(NET_FW_PROFILE_TYPE2_ profileType)
         {
             try
@@ -155,7 +156,7 @@ namespace CS_SAS_Staging
                 return ("Error", System.Drawing.Color.Red);
             }
         }
-
+        // Querying info on the firewall status for all 3 profiles
         private void QueryFirewallStatus()
         {
             try
@@ -184,13 +185,14 @@ namespace CS_SAS_Staging
                 LogToCsLog($"Error querying firewall statuses: {ex.Message}");
             }
         }
-
+        // Assistance with logging
         private void LogToCsLog(string logText)
         {
             // Append the log text to the "csLog" rich text box
             csLog.AppendText($"{logText}");
             csLog.ScrollToCaret();
         }
+        // Changing appropriate label and listed information when a new adapter is selected
         private void nwAdapt_SelectedIndexChanged(object sender, EventArgs e)
         {
             // Check if any item is selected in the ListBox
@@ -207,7 +209,7 @@ namespace CS_SAS_Staging
                 }
             }
         }
-
+        // Action for displaying the pre-stored adapter info, grabbed in the QueryNetworkAdapters function
         private void DisplayAdapterInfo(NetworkAdapter adapter)
         {
             try
@@ -236,7 +238,7 @@ namespace CS_SAS_Staging
                 LogToCsLog($"Error displaying adapter information: {ex.Message} \n");
             }
         }
-
+        // Grabbing / storing IP information for display. 
         private string GetFirstIPv4Address(NetworkInterface adapter)
         {
             var ipv4Addresses = adapter.GetIPProperties().UnicastAddresses
@@ -245,7 +247,7 @@ namespace CS_SAS_Staging
 
             return ipv4Addresses.FirstOrDefault() ?? "N/A";
         }
-
+        // Grabbing / storing IP information for display. 
         private string GetSubnetMask(NetworkInterface adapter)
         {
             var subnetMasks = adapter.GetIPProperties().UnicastAddresses
@@ -254,7 +256,7 @@ namespace CS_SAS_Staging
 
             return subnetMasks.FirstOrDefault() ?? "N/A";
         }
-
+        // Grabbing / storing IP information for display. 
         private string GetDefaultGateway(NetworkInterface adapter)
         {
             var gateways = adapter.GetIPProperties().GatewayAddresses
@@ -263,7 +265,7 @@ namespace CS_SAS_Staging
 
             return gateways.FirstOrDefault() ?? "N/A";
         }
-
+        // Grabbing / storing IP information for display. 
         private string GetPrimaryDNS(NetworkInterface adapter)
         {
             var dnsServers = adapter.GetIPProperties().DnsAddresses
@@ -272,7 +274,7 @@ namespace CS_SAS_Staging
 
             return dnsServers.FirstOrDefault() ?? "N/A";
         }
-
+        // Grabbing / storing IP information for display. 
         private string GetSecondaryDNS(NetworkInterface adapter)
         {
             var dnsServers = adapter.GetIPProperties().DnsAddresses
@@ -282,57 +284,58 @@ namespace CS_SAS_Staging
             // Skip the first DNS server to get the secondary one
             return dnsServers.Skip(1).FirstOrDefault() ?? "N/A";
         }
-
+        // WIP or Unused
         private void toolStripStatusLabel1_Click(object sender, EventArgs e)
         {
 
         }
-
+        // WIP or Unused
         private void eventVirewToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
         }
-
+        // WIP or Unused
         private void currentHSLabel_Click(object sender, EventArgs e)
         {
 
         }
-
+        // WIP or Unused
         private void newHsLabel_Click(object sender, EventArgs e)
         {
 
         }
-
+        // WIP or Unused
         private void tabNwMenu_Click(object sender, EventArgs e)
         {
 
         }
-
+        // WIP or Unused
         private void resetNwSet_Click(object sender, EventArgs e)
         {
 
         }
-
+        // WIP or Unused
         private void tabNwMenu_Click_1(object sender, EventArgs e)
         {
 
         }
-
+        // WIP or Unused
         private void fwOptSet_Click(object sender, EventArgs e)
         {
         }
-
+        // Calling the ReloadQueries function, also clearing the network adapter list to avoid duplication in the list 
         private void resetQuery_Click(object sender, EventArgs e) 
         {
             nwAdapt.Items.Clear();
             ReloadQueries();
         }
-
+        // Clearing the C# log that all functions write to 
         private void csLogClear_Click(object sender, EventArgs e)
         {
             csLog.Clear();
         }
-
+        // Function for changing hostname w/ error checking, as well as restart dialog
+        // This section utilized internal Batch commands, as I was unable to find simpler methods within native C#
         private void newHostname_Click(object sender, EventArgs e)
         {
             // Get the new hostname from the textbox
