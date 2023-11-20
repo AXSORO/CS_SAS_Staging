@@ -352,7 +352,7 @@ namespace CS_SAS_Staging
                     UseShellExecute = false,
                     CreateNoWindow = true
                 };
-
+                LogToCsLog($"PowerShell: Set-NetFireWallProfile -Enabled True\n");
                 process.StartInfo = startInfo;
                 process.Start();
 
@@ -362,14 +362,15 @@ namespace CS_SAS_Staging
 
                 // Wait for the process to finish
                 process.WaitForExit();
-
-                LogToCsLog($"Command: Enable firewall\nOutput: Success");
+                // Re-Load queries and write success 
+                nwAdapt.Items.Clear(); // To avoid NIC list duplication 
                 ReloadQueries();
+                LogToCsLog($"PowerShell: Enable firewall\nOutput: Success\n");
             }
             catch (Exception ex)
             {
                 // Handle exceptions and log errors
-                LogToCsLog($"Error enabling firewall: {ex.Message}");
+                LogToCsLog($"Error enabling firewall: {ex.Message}\n");
             }
         }
         // When the "disable" radio button is selected when the Set button is clicked, run this function - Calls CMD then PowerShell
@@ -390,7 +391,7 @@ namespace CS_SAS_Staging
                     UseShellExecute = false,
                     CreateNoWindow = true
                 };
-
+                LogToCsLog($"PowerShell: Set-NetFireWallProfile -Enabled False\n");
                 process.StartInfo = startInfo;
                 process.Start();
 
@@ -400,18 +401,18 @@ namespace CS_SAS_Staging
 
                 // Wait for the process to finish
                 process.WaitForExit();
-
-                LogToCsLog($"Command: Disable firewall\nOutput: Success");
+                // Re-Load queries and write success 
+                nwAdapt.Items.Clear();
                 ReloadQueries();
+                LogToCsLog($"PowerShell: Disable firewall\nOutput: Success\n");
             }
             catch (Exception ex)
             {
                 // Handle exceptions and log errors
-                LogToCsLog($"Error Disabling firewall: {ex.Message}");
+                LogToCsLog($"Error Disabling firewall: {ex.Message}\n");
             }
         }
         // Calling the ReloadQueries function, also clearing the network adapter list to avoid duplication in the list 
-        // This is also called after the firewall changes are made
         private void resetQuery_Click(object sender, EventArgs e) 
         {
             nwAdapt.Items.Clear();
