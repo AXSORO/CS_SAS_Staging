@@ -330,6 +330,7 @@
             fwOptSet.TabIndex = 40;
             fwOptSet.Text = "Set";
             fwOptSet.UseVisualStyleBackColor = true;
+            fwOptSet.Click += fwOptSet_Click;
             // 
             // fwDisableRadio
             // 

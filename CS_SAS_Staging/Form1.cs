@@ -319,11 +319,99 @@ namespace CS_SAS_Staging
         {
 
         }
-        // WIP or Unused
+        // Function for checking which radio button is selected when the "Set" button for the firewall state is clicked
         private void fwOptSet_Click(object sender, EventArgs e)
         {
+            // Check which radio button is selected
+            if (fwEnableRadio.Checked)
+            {
+                // Enable the firewall
+                EnableFirewall();
+            }
+            else if (fwDisableRadio.Checked)
+            {
+                // Disable the firewall
+                DisableFirewall();
+            }
+        }
+        // When the "enable" radio button is selected when the Set button is clicked, run this function
+        private void EnableFirewall()
+        {
+            try
+            {
+                // Build the PowerShell command to enable the firewall
+                string command = "powershell -Command \"Set-NetFirewallProfile -Enabled True\"";
+
+                // Start a process to execute the command
+                Process process = new Process();
+                ProcessStartInfo startInfo = new ProcessStartInfo
+                {
+                    FileName = "cmd.exe",
+                    RedirectStandardInput = true,
+                    RedirectStandardOutput = true,
+                    UseShellExecute = false,
+                    CreateNoWindow = true
+                };
+
+                process.StartInfo = startInfo;
+                process.Start();
+
+                // Pass the command to the command prompt
+                process.StandardInput.WriteLine(command);
+                process.StandardInput.WriteLine("exit");
+
+                // Wait for the process to finish
+                process.WaitForExit();
+
+                LogToCsLog($"Command: Enable firewall\nOutput: Success");
+                ReloadQueries();
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions and log errors
+                LogToCsLog($"Error enabling firewall: {ex.Message}");
+            }
+        }
+        // When the "disable" radio button is selected when the Set button is clicked, run this function
+        private void DisableFirewall()
+        {
+            try
+            {
+                // Build the PowerShell command to enable the firewall
+                string command = "powershell -Command \"Set-NetFirewallProfile -Enabled False\"";
+
+                // Start a process to execute the command
+                Process process = new Process();
+                ProcessStartInfo startInfo = new ProcessStartInfo
+                {
+                    FileName = "cmd.exe",
+                    RedirectStandardInput = true,
+                    RedirectStandardOutput = true,
+                    UseShellExecute = false,
+                    CreateNoWindow = true
+                };
+
+                process.StartInfo = startInfo;
+                process.Start();
+
+                // Pass the command to the command prompt
+                process.StandardInput.WriteLine(command);
+                process.StandardInput.WriteLine("exit");
+
+                // Wait for the process to finish
+                process.WaitForExit();
+
+                LogToCsLog($"Command: Disable firewall\nOutput: Success");
+                ReloadQueries();
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions and log errors
+                LogToCsLog($"Error Disabling firewall: {ex.Message}");
+            }
         }
         // Calling the ReloadQueries function, also clearing the network adapter list to avoid duplication in the list 
+        // This is also called after the firewall changes are made
         private void resetQuery_Click(object sender, EventArgs e) 
         {
             nwAdapt.Items.Clear();
