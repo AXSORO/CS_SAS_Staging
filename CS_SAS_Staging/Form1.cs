@@ -404,7 +404,7 @@ namespace CS_SAS_Staging
             }
         }
         // Calling the ReloadQueries function, also clearing the network adapter list to avoid duplication in the list 
-        private void resetQuery_Click(object sender, EventArgs e) 
+        private void resetQuery_Click(object sender, EventArgs e)
         {
             nwAdapt.Items.Clear();
             ReloadQueries();
@@ -574,7 +574,7 @@ namespace CS_SAS_Staging
             }
         }
         // Resets the network configuration text boxes with their last queried data
-        private void resetNwSet_click (object sender, EventArgs e)
+        private void resetNwSet_click(object sender, EventArgs e)
         {
             if (nwAdapt.SelectedItem != null)
             {
@@ -638,6 +638,11 @@ namespace CS_SAS_Staging
         {
             label.Text = success ? successText : "Failure";
             label.ForeColor = success ? Color.Green : Color.Red;
+        }
+
+        private void pwrLabel_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

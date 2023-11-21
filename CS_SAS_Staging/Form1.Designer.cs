@@ -96,10 +96,37 @@
             tabWinMenu = new TabPage();
             psLogWindow = new Label();
             csLogClear = new Button();
+            panel3 = new Panel();
+            panel4 = new Panel();
+            panel5 = new Panel();
+            panel6 = new Panel();
+            pwrLabel = new Label();
+            label6 = new Label();
+            label8 = new Label();
+            label7 = new Label();
+            label9 = new Label();
+            label10 = new Label();
+            panel2 = new Panel();
+            setMaxPwr = new Button();
+            stockPwrPlan = new Button();
+            label11 = new Label();
+            label12 = new Label();
+            label13 = new Label();
+            button1 = new Button();
+            button2 = new Button();
+            button3 = new Button();
+            label14 = new Label();
+            label15 = new Label();
+            label16 = new Label();
+            listBox1 = new ListBox();
+            label17 = new Label();
+            label18 = new Label();
             statusStrip1.SuspendLayout();
             menuStrip1.SuspendLayout();
             tabMain.SuspendLayout();
             tabNwMenu.SuspendLayout();
+            tabAppMenu.SuspendLayout();
+            tabWinMenu.SuspendLayout();
             SuspendLayout();
             // 
             // csLog
@@ -153,7 +180,7 @@
             // saveReportToolStripMenuItem
             // 
             saveReportToolStripMenuItem.Name = "saveReportToolStripMenuItem";
-            saveReportToolStripMenuItem.Size = new Size(136, 22);
+            saveReportToolStripMenuItem.Size = new Size(180, 22);
             saveReportToolStripMenuItem.Text = "Save Report";
             // 
             // shellToolStripMenuItem
@@ -664,6 +691,8 @@
             // 
             // tabAppMenu
             // 
+            tabAppMenu.Controls.Add(panel3);
+            tabAppMenu.Controls.Add(panel4);
             tabAppMenu.Location = new Point(4, 24);
             tabAppMenu.Name = "tabAppMenu";
             tabAppMenu.Padding = new Padding(3);
@@ -674,6 +703,29 @@
             // 
             // tabWinMenu
             // 
+            tabWinMenu.Controls.Add(label18);
+            tabWinMenu.Controls.Add(label17);
+            tabWinMenu.Controls.Add(listBox1);
+            tabWinMenu.Controls.Add(label16);
+            tabWinMenu.Controls.Add(label15);
+            tabWinMenu.Controls.Add(label14);
+            tabWinMenu.Controls.Add(button3);
+            tabWinMenu.Controls.Add(button2);
+            tabWinMenu.Controls.Add(button1);
+            tabWinMenu.Controls.Add(label13);
+            tabWinMenu.Controls.Add(label12);
+            tabWinMenu.Controls.Add(label11);
+            tabWinMenu.Controls.Add(stockPwrPlan);
+            tabWinMenu.Controls.Add(setMaxPwr);
+            tabWinMenu.Controls.Add(panel2);
+            tabWinMenu.Controls.Add(label10);
+            tabWinMenu.Controls.Add(label7);
+            tabWinMenu.Controls.Add(label9);
+            tabWinMenu.Controls.Add(label8);
+            tabWinMenu.Controls.Add(label6);
+            tabWinMenu.Controls.Add(pwrLabel);
+            tabWinMenu.Controls.Add(panel5);
+            tabWinMenu.Controls.Add(panel6);
             tabWinMenu.Location = new Point(4, 24);
             tabWinMenu.Name = "tabWinMenu";
             tabWinMenu.Size = new Size(500, 411);
@@ -700,6 +752,232 @@
             csLogClear.UseVisualStyleBackColor = true;
             csLogClear.Click += csLogClear_Click;
             // 
+            // panel3
+            // 
+            panel3.BackColor = Color.DimGray;
+            panel3.Location = new Point(192, 17);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(1, 376);
+            panel3.TabIndex = 32;
+            // 
+            // panel4
+            // 
+            panel4.BackColor = Color.DimGray;
+            panel4.Location = new Point(-44, 17);
+            panel4.Name = "panel4";
+            panel4.Size = new Size(588, 1);
+            panel4.TabIndex = 31;
+            // 
+            // panel5
+            // 
+            panel5.BackColor = Color.DimGray;
+            panel5.Location = new Point(192, 17);
+            panel5.Name = "panel5";
+            panel5.Size = new Size(1, 376);
+            panel5.TabIndex = 32;
+            // 
+            // panel6
+            // 
+            panel6.BackColor = Color.DimGray;
+            panel6.Location = new Point(-44, 17);
+            panel6.Name = "panel6";
+            panel6.Size = new Size(588, 1);
+            panel6.TabIndex = 31;
+            // 
+            // pwrLabel
+            // 
+            pwrLabel.AutoSize = true;
+            pwrLabel.Location = new Point(7, 102);
+            pwrLabel.Name = "pwrLabel";
+            pwrLabel.Size = new Size(112, 15);
+            pwrLabel.TabIndex = 33;
+            pwrLabel.Text = "Current Power Plan:";
+            pwrLabel.Click += pwrLabel_Click;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(7, 21);
+            label6.Name = "label6";
+            label6.Size = new Size(107, 15);
+            label6.TabIndex = 34;
+            label6.Text = "Screen Off Interval:";
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label8.Location = new Point(7, 36);
+            label8.Name = "label8";
+            label8.Size = new Size(76, 15);
+            label8.TabIndex = 36;
+            label8.Text = "Query Failed";
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label7.Location = new Point(7, 77);
+            label7.Name = "label7";
+            label7.Size = new Size(76, 15);
+            label7.TabIndex = 38;
+            label7.Text = "Query Failed";
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Location = new Point(7, 62);
+            label9.Name = "label9";
+            label9.Size = new Size(80, 15);
+            label9.TabIndex = 37;
+            label9.Text = "Sleep Interval:";
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label10.Location = new Point(7, 117);
+            label10.Name = "label10";
+            label10.Size = new Size(76, 15);
+            label10.TabIndex = 39;
+            label10.Text = "Query Failed";
+            // 
+            // panel2
+            // 
+            panel2.BackColor = Color.DimGray;
+            panel2.Location = new Point(0, 205);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(192, 1);
+            panel2.TabIndex = 32;
+            // 
+            // setMaxPwr
+            // 
+            setMaxPwr.Location = new Point(3, 176);
+            setMaxPwr.Name = "setMaxPwr";
+            setMaxPwr.Size = new Size(183, 23);
+            setMaxPwr.TabIndex = 40;
+            setMaxPwr.Text = "High Performance Plan";
+            setMaxPwr.UseVisualStyleBackColor = true;
+            // 
+            // stockPwrPlan
+            // 
+            stockPwrPlan.Location = new Point(3, 147);
+            stockPwrPlan.Name = "stockPwrPlan";
+            stockPwrPlan.Size = new Size(183, 23);
+            stockPwrPlan.TabIndex = 41;
+            stockPwrPlan.Text = "Revert to Defaults";
+            stockPwrPlan.UseVisualStyleBackColor = true;
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Location = new Point(23, 208);
+            label11.Name = "label11";
+            label11.Size = new Size(145, 15);
+            label11.TabIndex = 42;
+            label11.Text = "Remote Desktop Protocol:";
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Location = new Point(29, 321);
+            label12.Name = "label12";
+            label12.Size = new Size(139, 15);
+            label12.TabIndex = 43;
+            label12.Text = "Setting 1 (Control Panel):";
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Location = new Point(44, 364);
+            label13.Name = "label13";
+            label13.Size = new Size(108, 15);
+            label13.TabIndex = 44;
+            label13.Text = "Setting 2 (Win10+):";
+            // 
+            // button1
+            // 
+            button1.Location = new Point(7, 226);
+            button1.Name = "button1";
+            button1.Size = new Size(179, 23);
+            button1.TabIndex = 45;
+            button1.Text = "Enable";
+            button1.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            button2.Location = new Point(7, 255);
+            button2.Name = "button2";
+            button2.Size = new Size(179, 23);
+            button2.TabIndex = 46;
+            button2.Text = "Disable";
+            button2.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            button3.Location = new Point(53, 284);
+            button3.Name = "button3";
+            button3.Size = new Size(89, 23);
+            button3.TabIndex = 47;
+            button3.Text = "Add F/W Rule";
+            button3.UseVisualStyleBackColor = true;
+            // 
+            // label14
+            // 
+            label14.AutoSize = true;
+            label14.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label14.Location = new Point(58, 341);
+            label14.Name = "label14";
+            label14.Size = new Size(76, 15);
+            label14.TabIndex = 48;
+            label14.Text = "Query Failed";
+            // 
+            // label15
+            // 
+            label15.AutoSize = true;
+            label15.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label15.Location = new Point(58, 385);
+            label15.Name = "label15";
+            label15.Size = new Size(76, 15);
+            label15.TabIndex = 49;
+            label15.Text = "Query Failed";
+            // 
+            // label16
+            // 
+            label16.AutoSize = true;
+            label16.Location = new Point(194, 4);
+            label16.Name = "label16";
+            label16.Size = new Size(106, 15);
+            label16.TabIndex = 50;
+            label16.Text = "SAM Management";
+            // 
+            // listBox1
+            // 
+            listBox1.FormattingEnabled = true;
+            listBox1.ItemHeight = 15;
+            listBox1.Location = new Point(199, 62);
+            listBox1.Name = "listBox1";
+            listBox1.Size = new Size(194, 94);
+            listBox1.TabIndex = 51;
+            // 
+            // label17
+            // 
+            label17.AutoSize = true;
+            label17.Location = new Point(251, 44);
+            label17.Name = "label17";
+            label17.Size = new Size(75, 15);
+            label17.TabIndex = 52;
+            label17.Text = "Users Found:";
+            // 
+            // label18
+            // 
+            label18.AutoSize = true;
+            label18.Location = new Point(1, 4);
+            label18.Name = "label18";
+            label18.Size = new Size(114, 15);
+            label18.TabIndex = 53;
+            label18.Text = "Power Management";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -722,6 +1000,9 @@
             tabMain.ResumeLayout(false);
             tabNwMenu.ResumeLayout(false);
             tabNwMenu.PerformLayout();
+            tabAppMenu.ResumeLayout(false);
+            tabWinMenu.ResumeLayout(false);
+            tabWinMenu.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -795,5 +1076,30 @@
         private Button resetQuery;
         private Label cHostName;
         private Button csLogClear;
+        private Panel panel3;
+        private Panel panel4;
+        private Label label6;
+        private Label pwrLabel;
+        private Panel panel5;
+        private Panel panel6;
+        private Label label10;
+        private Label label7;
+        private Label label9;
+        private Label label8;
+        private Button stockPwrPlan;
+        private Button setMaxPwr;
+        private Panel panel2;
+        private Label label14;
+        private Button button3;
+        private Button button2;
+        private Button button1;
+        private Label label13;
+        private Label label12;
+        private Label label11;
+        private Label label16;
+        private Label label15;
+        private Label label18;
+        private Label label17;
+        private ListBox listBox1;
     }
 }
