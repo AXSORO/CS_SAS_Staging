@@ -102,25 +102,41 @@
             panel6 = new Panel();
             pwrLabel = new Label();
             label6 = new Label();
-            label8 = new Label();
-            label7 = new Label();
+            pwrScrnOff = new Label();
+            pwrSleep = new Label();
             label9 = new Label();
-            label10 = new Label();
+            pwrCurrentPlan = new Label();
             panel2 = new Panel();
             setMaxPwr = new Button();
             stockPwrPlan = new Button();
             label11 = new Label();
             label12 = new Label();
             label13 = new Label();
-            button1 = new Button();
-            button2 = new Button();
-            button3 = new Button();
-            label14 = new Label();
-            label15 = new Label();
+            enableRDP = new Button();
+            disableRDP = new Button();
+            rdpFwRules = new Button();
+            rdpSet1Query = new Label();
+            rdpSet2Query = new Label();
             label16 = new Label();
-            listBox1 = new ListBox();
+            usrCollect = new ListBox();
             label17 = new Label();
             label18 = new Label();
+            usrPwConfirm = new TextBox();
+            usrPw = new TextBox();
+            usrName = new TextBox();
+            label10 = new Label();
+            label14 = new Label();
+            label15 = new Label();
+            isUsrAdmin = new CheckBox();
+            isUsrDisabled = new CheckBox();
+            openLusrmgr = new Button();
+            usrSetPw = new Button();
+            resetAllPw = new Button();
+            usrApply = new Button();
+            isUsrRdp = new CheckBox();
+            panel7 = new Panel();
+            controlWindowsUpdate = new Button();
+            scriptWindowsUpdate = new Button();
             statusStrip1.SuspendLayout();
             menuStrip1.SuspendLayout();
             tabMain.SuspendLayout();
@@ -703,25 +719,41 @@
             // 
             // tabWinMenu
             // 
+            tabWinMenu.Controls.Add(scriptWindowsUpdate);
+            tabWinMenu.Controls.Add(controlWindowsUpdate);
+            tabWinMenu.Controls.Add(panel7);
+            tabWinMenu.Controls.Add(isUsrRdp);
+            tabWinMenu.Controls.Add(usrApply);
+            tabWinMenu.Controls.Add(resetAllPw);
+            tabWinMenu.Controls.Add(usrSetPw);
+            tabWinMenu.Controls.Add(openLusrmgr);
+            tabWinMenu.Controls.Add(isUsrDisabled);
+            tabWinMenu.Controls.Add(isUsrAdmin);
+            tabWinMenu.Controls.Add(usrPwConfirm);
+            tabWinMenu.Controls.Add(usrPw);
+            tabWinMenu.Controls.Add(usrName);
+            tabWinMenu.Controls.Add(label10);
+            tabWinMenu.Controls.Add(label14);
+            tabWinMenu.Controls.Add(label15);
             tabWinMenu.Controls.Add(label18);
             tabWinMenu.Controls.Add(label17);
-            tabWinMenu.Controls.Add(listBox1);
+            tabWinMenu.Controls.Add(usrCollect);
             tabWinMenu.Controls.Add(label16);
-            tabWinMenu.Controls.Add(label15);
-            tabWinMenu.Controls.Add(label14);
-            tabWinMenu.Controls.Add(button3);
-            tabWinMenu.Controls.Add(button2);
-            tabWinMenu.Controls.Add(button1);
+            tabWinMenu.Controls.Add(rdpSet2Query);
+            tabWinMenu.Controls.Add(rdpSet1Query);
+            tabWinMenu.Controls.Add(rdpFwRules);
+            tabWinMenu.Controls.Add(disableRDP);
+            tabWinMenu.Controls.Add(enableRDP);
             tabWinMenu.Controls.Add(label13);
             tabWinMenu.Controls.Add(label12);
             tabWinMenu.Controls.Add(label11);
             tabWinMenu.Controls.Add(stockPwrPlan);
             tabWinMenu.Controls.Add(setMaxPwr);
             tabWinMenu.Controls.Add(panel2);
-            tabWinMenu.Controls.Add(label10);
-            tabWinMenu.Controls.Add(label7);
+            tabWinMenu.Controls.Add(pwrCurrentPlan);
+            tabWinMenu.Controls.Add(pwrSleep);
             tabWinMenu.Controls.Add(label9);
-            tabWinMenu.Controls.Add(label8);
+            tabWinMenu.Controls.Add(pwrScrnOff);
             tabWinMenu.Controls.Add(label6);
             tabWinMenu.Controls.Add(pwrLabel);
             tabWinMenu.Controls.Add(panel5);
@@ -732,6 +764,7 @@
             tabWinMenu.TabIndex = 2;
             tabWinMenu.Text = "Windows Config.";
             tabWinMenu.UseVisualStyleBackColor = true;
+            tabWinMenu.Click += tabWinMenu_Click;
             // 
             // psLogWindow
             // 
@@ -803,25 +836,25 @@
             label6.TabIndex = 34;
             label6.Text = "Screen Off Interval:";
             // 
-            // label8
+            // pwrScrnOff
             // 
-            label8.AutoSize = true;
-            label8.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label8.Location = new Point(7, 36);
-            label8.Name = "label8";
-            label8.Size = new Size(76, 15);
-            label8.TabIndex = 36;
-            label8.Text = "Query Failed";
+            pwrScrnOff.AutoSize = true;
+            pwrScrnOff.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            pwrScrnOff.Location = new Point(7, 36);
+            pwrScrnOff.Name = "pwrScrnOff";
+            pwrScrnOff.Size = new Size(76, 15);
+            pwrScrnOff.TabIndex = 36;
+            pwrScrnOff.Text = "Query Failed";
             // 
-            // label7
+            // pwrSleep
             // 
-            label7.AutoSize = true;
-            label7.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label7.Location = new Point(7, 77);
-            label7.Name = "label7";
-            label7.Size = new Size(76, 15);
-            label7.TabIndex = 38;
-            label7.Text = "Query Failed";
+            pwrSleep.AutoSize = true;
+            pwrSleep.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            pwrSleep.Location = new Point(7, 77);
+            pwrSleep.Name = "pwrSleep";
+            pwrSleep.Size = new Size(76, 15);
+            pwrSleep.TabIndex = 38;
+            pwrSleep.Text = "Query Failed";
             // 
             // label9
             // 
@@ -832,15 +865,15 @@
             label9.TabIndex = 37;
             label9.Text = "Sleep Interval:";
             // 
-            // label10
+            // pwrCurrentPlan
             // 
-            label10.AutoSize = true;
-            label10.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label10.Location = new Point(7, 117);
-            label10.Name = "label10";
-            label10.Size = new Size(76, 15);
-            label10.TabIndex = 39;
-            label10.Text = "Query Failed";
+            pwrCurrentPlan.AutoSize = true;
+            pwrCurrentPlan.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            pwrCurrentPlan.Location = new Point(7, 117);
+            pwrCurrentPlan.Name = "pwrCurrentPlan";
+            pwrCurrentPlan.Size = new Size(76, 15);
+            pwrCurrentPlan.TabIndex = 39;
+            pwrCurrentPlan.Text = "Query Failed";
             // 
             // panel2
             // 
@@ -895,52 +928,52 @@
             label13.TabIndex = 44;
             label13.Text = "Setting 2 (Win10+):";
             // 
-            // button1
+            // enableRDP
             // 
-            button1.Location = new Point(7, 226);
-            button1.Name = "button1";
-            button1.Size = new Size(179, 23);
-            button1.TabIndex = 45;
-            button1.Text = "Enable";
-            button1.UseVisualStyleBackColor = true;
+            enableRDP.Location = new Point(7, 226);
+            enableRDP.Name = "enableRDP";
+            enableRDP.Size = new Size(179, 23);
+            enableRDP.TabIndex = 45;
+            enableRDP.Text = "Enable";
+            enableRDP.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // disableRDP
             // 
-            button2.Location = new Point(7, 255);
-            button2.Name = "button2";
-            button2.Size = new Size(179, 23);
-            button2.TabIndex = 46;
-            button2.Text = "Disable";
-            button2.UseVisualStyleBackColor = true;
+            disableRDP.Location = new Point(7, 255);
+            disableRDP.Name = "disableRDP";
+            disableRDP.Size = new Size(179, 23);
+            disableRDP.TabIndex = 46;
+            disableRDP.Text = "Disable";
+            disableRDP.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // rdpFwRules
             // 
-            button3.Location = new Point(53, 284);
-            button3.Name = "button3";
-            button3.Size = new Size(89, 23);
-            button3.TabIndex = 47;
-            button3.Text = "Add F/W Rule";
-            button3.UseVisualStyleBackColor = true;
+            rdpFwRules.Location = new Point(53, 284);
+            rdpFwRules.Name = "rdpFwRules";
+            rdpFwRules.Size = new Size(89, 23);
+            rdpFwRules.TabIndex = 47;
+            rdpFwRules.Text = "Add F/W Rule";
+            rdpFwRules.UseVisualStyleBackColor = true;
             // 
-            // label14
+            // rdpSet1Query
             // 
-            label14.AutoSize = true;
-            label14.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label14.Location = new Point(58, 341);
-            label14.Name = "label14";
-            label14.Size = new Size(76, 15);
-            label14.TabIndex = 48;
-            label14.Text = "Query Failed";
+            rdpSet1Query.AutoSize = true;
+            rdpSet1Query.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            rdpSet1Query.Location = new Point(58, 341);
+            rdpSet1Query.Name = "rdpSet1Query";
+            rdpSet1Query.Size = new Size(76, 15);
+            rdpSet1Query.TabIndex = 48;
+            rdpSet1Query.Text = "Query Failed";
             // 
-            // label15
+            // rdpSet2Query
             // 
-            label15.AutoSize = true;
-            label15.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label15.Location = new Point(58, 385);
-            label15.Name = "label15";
-            label15.Size = new Size(76, 15);
-            label15.TabIndex = 49;
-            label15.Text = "Query Failed";
+            rdpSet2Query.AutoSize = true;
+            rdpSet2Query.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            rdpSet2Query.Location = new Point(58, 385);
+            rdpSet2Query.Name = "rdpSet2Query";
+            rdpSet2Query.Size = new Size(76, 15);
+            rdpSet2Query.TabIndex = 49;
+            rdpSet2Query.Text = "Query Failed";
             // 
             // label16
             // 
@@ -951,19 +984,19 @@
             label16.TabIndex = 50;
             label16.Text = "SAM Management";
             // 
-            // listBox1
+            // usrCollect
             // 
-            listBox1.FormattingEnabled = true;
-            listBox1.ItemHeight = 15;
-            listBox1.Location = new Point(199, 62);
-            listBox1.Name = "listBox1";
-            listBox1.Size = new Size(194, 94);
-            listBox1.TabIndex = 51;
+            usrCollect.FormattingEnabled = true;
+            usrCollect.ItemHeight = 15;
+            usrCollect.Location = new Point(199, 47);
+            usrCollect.Name = "usrCollect";
+            usrCollect.Size = new Size(194, 94);
+            usrCollect.TabIndex = 51;
             // 
             // label17
             // 
             label17.AutoSize = true;
-            label17.Location = new Point(251, 44);
+            label17.Location = new Point(254, 29);
             label17.Name = "label17";
             label17.Size = new Size(75, 15);
             label17.TabIndex = 52;
@@ -977,6 +1010,147 @@
             label18.Size = new Size(114, 15);
             label18.TabIndex = 53;
             label18.Text = "Power Management";
+            // 
+            // usrPwConfirm
+            // 
+            usrPwConfirm.Location = new Point(322, 200);
+            usrPwConfirm.Name = "usrPwConfirm";
+            usrPwConfirm.Size = new Size(155, 23);
+            usrPwConfirm.TabIndex = 61;
+            // 
+            // usrPw
+            // 
+            usrPw.Location = new Point(322, 174);
+            usrPw.Name = "usrPw";
+            usrPw.Size = new Size(155, 23);
+            usrPw.TabIndex = 60;
+            // 
+            // usrName
+            // 
+            usrName.Location = new Point(322, 148);
+            usrName.Name = "usrName";
+            usrName.Size = new Size(155, 23);
+            usrName.TabIndex = 59;
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Location = new Point(199, 203);
+            label10.Name = "label10";
+            label10.Size = new Size(107, 15);
+            label10.TabIndex = 56;
+            label10.Text = "Confirm Password:";
+            // 
+            // label14
+            // 
+            label14.AutoSize = true;
+            label14.Location = new Point(199, 177);
+            label14.Name = "label14";
+            label14.Size = new Size(60, 15);
+            label14.TabIndex = 55;
+            label14.Text = "Password:";
+            // 
+            // label15
+            // 
+            label15.AutoSize = true;
+            label15.Location = new Point(199, 151);
+            label15.Name = "label15";
+            label15.Size = new Size(90, 15);
+            label15.TabIndex = 54;
+            label15.Text = "Account Name:";
+            // 
+            // isUsrAdmin
+            // 
+            isUsrAdmin.AutoSize = true;
+            isUsrAdmin.Location = new Point(204, 226);
+            isUsrAdmin.Name = "isUsrAdmin";
+            isUsrAdmin.Size = new Size(99, 19);
+            isUsrAdmin.TabIndex = 62;
+            isUsrAdmin.Text = "Administrator";
+            isUsrAdmin.UseVisualStyleBackColor = true;
+            // 
+            // isUsrDisabled
+            // 
+            isUsrDisabled.AutoSize = true;
+            isUsrDisabled.Location = new Point(204, 276);
+            isUsrDisabled.Name = "isUsrDisabled";
+            isUsrDisabled.Size = new Size(71, 19);
+            isUsrDisabled.TabIndex = 63;
+            isUsrDisabled.Text = "Disabled";
+            isUsrDisabled.UseVisualStyleBackColor = true;
+            // 
+            // openLusrmgr
+            // 
+            openLusrmgr.Location = new Point(199, 327);
+            openLusrmgr.Name = "openLusrmgr";
+            openLusrmgr.Size = new Size(122, 23);
+            openLusrmgr.TabIndex = 64;
+            openLusrmgr.Text = "Local User Manager";
+            openLusrmgr.UseVisualStyleBackColor = true;
+            // 
+            // usrSetPw
+            // 
+            usrSetPw.Location = new Point(199, 301);
+            usrSetPw.Name = "usrSetPw";
+            usrSetPw.Size = new Size(122, 23);
+            usrSetPw.TabIndex = 65;
+            usrSetPw.Text = "Set Password";
+            usrSetPw.UseVisualStyleBackColor = true;
+            // 
+            // resetAllPw
+            // 
+            resetAllPw.Location = new Point(327, 301);
+            resetAllPw.Name = "resetAllPw";
+            resetAllPw.Size = new Size(122, 23);
+            resetAllPw.TabIndex = 66;
+            resetAllPw.Text = "Reset All Passwords";
+            resetAllPw.UseVisualStyleBackColor = true;
+            // 
+            // usrApply
+            // 
+            usrApply.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            usrApply.Location = new Point(327, 327);
+            usrApply.Name = "usrApply";
+            usrApply.Size = new Size(122, 23);
+            usrApply.TabIndex = 67;
+            usrApply.Text = "Apply Changes";
+            usrApply.UseVisualStyleBackColor = true;
+            // 
+            // isUsrRdp
+            // 
+            isUsrRdp.AutoSize = true;
+            isUsrRdp.Location = new Point(204, 251);
+            isUsrRdp.Name = "isUsrRdp";
+            isUsrRdp.Size = new Size(139, 19);
+            isUsrRdp.TabIndex = 68;
+            isUsrRdp.Text = "Remote Desktop User";
+            isUsrRdp.UseVisualStyleBackColor = true;
+            // 
+            // panel7
+            // 
+            panel7.BackColor = Color.DimGray;
+            panel7.Location = new Point(192, 364);
+            panel7.Name = "panel7";
+            panel7.Size = new Size(310, 1);
+            panel7.TabIndex = 33;
+            // 
+            // controlWindowsUpdate
+            // 
+            controlWindowsUpdate.Location = new Point(347, 367);
+            controlWindowsUpdate.Name = "controlWindowsUpdate";
+            controlWindowsUpdate.Size = new Size(142, 23);
+            controlWindowsUpdate.TabIndex = 70;
+            controlWindowsUpdate.Text = "Windows Update";
+            controlWindowsUpdate.UseVisualStyleBackColor = true;
+            // 
+            // scriptWindowsUpdate
+            // 
+            scriptWindowsUpdate.Location = new Point(199, 367);
+            scriptWindowsUpdate.Name = "scriptWindowsUpdate";
+            scriptWindowsUpdate.Size = new Size(142, 23);
+            scriptWindowsUpdate.TabIndex = 71;
+            scriptWindowsUpdate.Text = "Windows Update Script";
+            scriptWindowsUpdate.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -1082,24 +1256,40 @@
         private Label pwrLabel;
         private Panel panel5;
         private Panel panel6;
-        private Label label10;
-        private Label label7;
+        private Label pwrCurrentPlan;
+        private Label pwrSleep;
         private Label label9;
-        private Label label8;
+        private Label pwrScrnOff;
         private Button stockPwrPlan;
         private Button setMaxPwr;
         private Panel panel2;
-        private Label label14;
-        private Button button3;
-        private Button button2;
-        private Button button1;
+        private Label rdpSet1Query;
+        private Button rdpFwRules;
+        private Button disableRDP;
+        private Button enableRDP;
         private Label label13;
         private Label label12;
         private Label label11;
         private Label label16;
-        private Label label15;
+        private Label rdpSet2Query;
         private Label label18;
         private Label label17;
-        private ListBox listBox1;
+        private ListBox usrCollect;
+        private CheckBox isUsrDisabled;
+        private CheckBox isUsrAdmin;
+        private TextBox usrPwConfirm;
+        private TextBox usrPw;
+        private TextBox usrName;
+        private Label label10;
+        private Label label14;
+        private Label label15;
+        private Button usrSetPw;
+        private Button openLusrmgr;
+        private Button usrApply;
+        private Button resetAllPw;
+        private CheckBox isUsrRdp;
+        private Panel panel7;
+        private Button scriptWindowsUpdate;
+        private Button controlWindowsUpdate;
     }
 }
