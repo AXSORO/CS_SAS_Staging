@@ -5,10 +5,11 @@ using System.Diagnostics; // Assisting with system management
 using System.Net.NetworkInformation; // Assisting with network information queries 
 using System.Windows.Forms; // Calling for WinForms designer and assets
 using NetFwTypeLib; // FirewallAPI for assistance of querying and grabbing info of the firewall 
-using System.Collections.Generic;
+using System.Collections.Generic; // Assisting with querying actions
 using System.Net.Sockets; // Assisting with the querying of current networking information 
 using Microsoft.VisualBasic.Devices; // Assisting with calling Batch/CMD commands
 using System.Management; // Assisting with system changes 
+using System.DirectoryServices; // Using directory services to pull local user accounts for display 
 using System.Runtime.InteropServices; // Assisting with system management cases
 using static CS_SAS_Staging.NetworkAdapter; // This is calling a secondary class I created to help parsing of the Network Adapter information 
 
@@ -73,12 +74,14 @@ namespace CS_SAS_Staging
             QueryMachineInfo();
             QueryNetworkAdapters();
             QueryFirewallStatus();
+            QueryUsers();
         }
         // Action for pulling machine hostname and displaying it in appropriate label
         private void QueryMachineInfo()
         {
             try
             {
+
                 // Query and display current machine hostname
                 string hostname = System.Net.Dns.GetHostName();
                 cHostName.Text = hostname;
@@ -92,7 +95,66 @@ namespace CS_SAS_Staging
                 LogToCsLog($"Error querying machine hostname: {ex.Message}\n");
             }
         }
-        // Action for listing network adapters and pre-storing their IP information for display / changes using NetSH 
+        // Action for collecting local user information - asyncronized 
+        private async Task<List<string>> GetUsersAsync()
+        {
+            List<string> users = new List<string>();
+
+            try
+            {
+                // Set up the Directory Entry
+                using (DirectoryEntry localMachine = new DirectoryEntry("WinNT://" + Environment.MachineName))
+                {
+                    // Iterate through the user entries
+                    await Task.Run(() =>
+                    {
+                        foreach (DirectoryEntry user in localMachine.Children)
+                        {
+                            if (user.SchemaClassName == "User")
+                            {
+                                string username = user.Name;
+                                users.Add(username);
+                            }
+                        }
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions or log errors
+                csLog.AppendText($"Error querying user information: {ex.Message}\n");
+            }
+
+            // Simulate some delay to represent the query process
+            await Task.Delay(250);
+
+            return users;
+        }
+        // Function of parsing information grabbed from user query, avoiding application hangs while it runs
+        private async void QueryUsers()
+        {
+            csLog.AppendText("Query: WinNT:// In Progress\n");
+            csLog.AppendText("\nPlease Wait...\n");
+
+            List<string> users = await GetUsersAsync();
+
+            UpdateUserListBox(users);
+
+            csLog.AppendText("Query: Complete\n");
+        }
+        //Display users found from query in proper ListBox
+        private void UpdateUserListBox(List<string> users)
+        {
+            // Clear existing items
+            usrCollect.Items.Clear();
+
+            // Add new items
+            foreach (string user in users)
+            {
+                usrCollect.Items.Add(user);
+            }
+        }
+        // Query network adapter information - display it in proper listbox
         private void QueryNetworkAdapters()
         {
             try
