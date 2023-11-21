@@ -10,6 +10,7 @@ using System.Net.Sockets; // Assisting with the querying of current networking i
 using Microsoft.VisualBasic.Devices; // Assisting with calling Batch/CMD commands
 using System.Management; // Assisting with system changes 
 using System.DirectoryServices; // Using directory services to pull local user accounts for display 
+using System.DirectoryServices.AccountManagement; // Using account management services to pull more minute accounr details
 using System.Runtime.InteropServices; // Assisting with system management cases
 using static CS_SAS_Staging.NetworkAdapter; // This is calling a secondary class I created to help parsing of the Network Adapter information 
 
@@ -26,7 +27,7 @@ namespace CS_SAS_Staging
             Load += Form1_Load;
 
             // Display selected adapter below the listBox
-            nwAdapt.SelectedIndexChanged += nwAdapt_SelectedIndexChanged;
+            nwAdapt.SelectedIndexChanged += nwAdapt_SelectedIndexChanged; // Handling the event of changes in the networking listbox
         }
         // Log init - the text being displayed is for fun and for show
         private async void Form1_Load(object sender, EventArgs e)
