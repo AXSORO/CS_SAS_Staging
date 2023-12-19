@@ -46,7 +46,9 @@ namespace CS_SAS_Staging
             await Task.Delay(250);
             LogToCsLog("Running Queries...\n");
             await Task.Delay(1000);
-            LogToCsLog("Complete. Starting application.");
+            LogToCsLog("Primary Queries Complete.\n");
+            await Task.Delay(250);
+            LogToCsLog("Starting application.");
             await Task.Delay(250);
             LogToCsLog(".");
             await Task.Delay(250);
@@ -75,8 +77,8 @@ namespace CS_SAS_Staging
             QueryMachineInfo();
             QueryNetworkAdapters();
             QueryFirewallStatus();
-            QueryUsers();
             QueryPowerSettings();
+            QueryUsers();
         }
         // Action for pulling machine hostname and displaying it in appropriate label
         private void QueryMachineInfo()
@@ -136,13 +138,13 @@ namespace CS_SAS_Staging
         private async void QueryUsers()
         {
             csLog.AppendText("Query: WinNT:// In Progress\n");
-            csLog.AppendText("\nPlease Wait...\n");
+            csLog.AppendText("\nPlease Wait, Querying Users...\n");
 
             List<string> users = await GetUsersAsync();
 
             UpdateUserListBox(users);
 
-            csLog.AppendText("Query: Complete\n");
+            csLog.AppendText("User Query: Complete\n");
         }
         //Display users found from query in proper ListBox
         private void UpdateUserListBox(List<string> users)
@@ -345,7 +347,7 @@ namespace CS_SAS_Staging
             try
             {
                 // Create a WMI query to retrieve power settings
-                ObjectQuery query = new ObjectQuery("SELECT * FROM Win32_PowerSetting");
+                ObjectQuery query = new ObjectQuery("SELECT * FROM Win32_Desktop");
 
                 using (ManagementObjectSearcher searcher = new ManagementObjectSearcher(query))
                 {
@@ -397,7 +399,7 @@ namespace CS_SAS_Staging
                             if ((bool)powerPlan["IsActive"])
                             {
                                 // Update the label with the current power plan
-                                pwrCurrentPlan.Invoke((MethodInvoker)(() => pwrCurrentPlan.Text = $"Current Power Plan: {powerPlan["ElementName"]}"));
+                                pwrCurrentPlan.Invoke((MethodInvoker)(() => pwrCurrentPlan.Text = $"{powerPlan["ElementName"]}"));
                                 break;
                             }
                         }
@@ -407,7 +409,7 @@ namespace CS_SAS_Staging
             catch (Exception ex)
             {
                 // Handle exceptions and log errors
-                LogToCsLog($"Error querying power settings: {ex.Message}\n");
+                LogToCsLog($"\nError querying Power Settings: {ex.Message}\n\n");
             }
         }
         // Querying current power settings for display on frontend
