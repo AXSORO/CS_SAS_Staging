@@ -76,6 +76,7 @@ namespace CS_SAS_Staging
             QueryNetworkAdapters();
             QueryFirewallStatus();
             QueryUsers();
+            QueryPowerSettings();
         }
         // Action for pulling machine hostname and displaying it in appropriate label
         private void QueryMachineInfo()
@@ -339,6 +340,65 @@ namespace CS_SAS_Staging
             return dnsServers.FirstOrDefault() ?? "N/A";
         }
         // Grabbing / storing IP information for display. 
+        private void QueryPowerSettings()
+        {
+            try
+            {
+                // Create a WMI query to retrieve power settings
+                ObjectQuery query = new ObjectQuery("SELECT * FROM Win32_PowerSetting WHERE ElementName = 'Monitor Standby Timeout' OR ElementName = 'Sleep Timeout'");
+
+                using (ManagementObjectSearcher searcher = new ManagementObjectSearcher(query))
+                {
+                    ManagementObjectCollection settings = searcher.Get();
+
+                    string screenOffInterval = "";
+                    string sleepInterval = "";
+
+                    foreach (ManagementObject setting in settings)
+                    {
+                        // Get the interval in seconds
+                        int intervalInSeconds = Convert.ToInt32(setting["SettingIndex"]);
+
+                        // Convert seconds to minutes
+                        int intervalInMinutes = intervalInSeconds / 60;
+
+                        // Determine the setting and update the corresponding variable
+                        switch (setting["ElementName"].ToString())
+                        {
+                            case "Monitor Standby Timeout":
+                                screenOffInterval = $"Screen Off Interval: {intervalInMinutes} minutes";
+                                break;
+
+                            case "Sleep Timeout":
+                                sleepInterval = $"Sleep Interval: {intervalInMinutes} minutes";
+                                break;
+                        }
+                    }
+                }
+
+                // Get the current power plan
+                using (ManagementObjectSearcher powerPlanSearcher = new ManagementObjectSearcher("SELECT * FROM Win32_PowerPlan"))
+                {
+                    ManagementObjectCollection powerPlans = powerPlanSearcher.Get();
+
+                    foreach (ManagementObject powerPlan in powerPlans)
+                    {
+                        if ((bool)powerPlan["IsActive"])
+                        {
+                            // Update the label with the current power plan
+                            pwrCurrentPlan.Text = $"Current Power Plan: {powerPlan["ElementName"]}";
+                            break;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions and log errors
+                LogToCsLog($"Error querying power settings: {ex.Message}\n");
+            }
+        }
+        // Querying current power settings for display on frontend
         private string GetSecondaryDNS(NetworkInterface adapter)
         {
             var dnsServers = adapter.GetIPProperties().DnsAddresses
