@@ -345,7 +345,7 @@ namespace CS_SAS_Staging
             try
             {
                 // Create a WMI query to retrieve power settings
-                ObjectQuery query = new ObjectQuery("SELECT * FROM Win32_PowerSetting WHERE ElementName = 'Monitor Standby Timeout' OR ElementName = 'Sleep Timeout'");
+                ObjectQuery query = new ObjectQuery("SELECT * FROM Win32_PowerSetting");
 
                 using (ManagementObjectSearcher searcher = new ManagementObjectSearcher(query))
                 {
@@ -356,38 +356,50 @@ namespace CS_SAS_Staging
 
                     foreach (ManagementObject setting in settings)
                     {
-                        // Get the interval in seconds
-                        int intervalInSeconds = Convert.ToInt32(setting["SettingIndex"]);
-
-                        // Convert seconds to minutes
-                        int intervalInMinutes = intervalInSeconds / 60;
-
-                        // Determine the setting and update the corresponding variable
-                        switch (setting["ElementName"].ToString())
+                        // Check if the setting is related to monitor standby or sleep timeout
+                        if (setting["ElementName"] != null)
                         {
-                            case "Monitor Standby Timeout":
-                                screenOffInterval = $"Screen Off Interval: {intervalInMinutes} minutes";
-                                break;
+                            string elementName = setting["ElementName"].ToString().ToLower();
 
-                            case "Sleep Timeout":
-                                sleepInterval = $"Sleep Interval: {intervalInMinutes} minutes";
-                                break;
+                            if (elementName.Contains("standby") || elementName.Contains("sleep"))
+                            {
+                                // Get the interval in seconds
+                                int intervalInSeconds = Convert.ToInt32(setting["SettingIndex"]);
+
+                                // Convert seconds to minutes
+                                int intervalInMinutes = intervalInSeconds / 60;
+
+                                // Determine the setting and update the corresponding variable
+                                if (elementName.Contains("standby"))
+                                {
+                                    screenOffInterval = $"Screen Off Interval: {intervalInMinutes} minutes";
+                                }
+                                else if (elementName.Contains("sleep"))
+                                {
+                                    sleepInterval = $"Sleep Interval: {intervalInMinutes} minutes";
+                                }
+                            }
                         }
                     }
+
+                    // Update the labels with the power settings
+                    pwrScrnOff.Invoke((MethodInvoker)(() => pwrScrnOff.Text = screenOffInterval));
+                    pwrSleep.Invoke((MethodInvoker)(() => pwrSleep.Text = sleepInterval));
                 }
 
                 // Get the current power plan
-                using (ManagementObjectSearcher powerPlanSearcher = new ManagementObjectSearcher("SELECT * FROM Win32_PowerPlan"))
+                using (ManagementClass powerPlanClass = new ManagementClass("Win32_PowerPlan"))
                 {
-                    ManagementObjectCollection powerPlans = powerPlanSearcher.Get();
-
-                    foreach (ManagementObject powerPlan in powerPlans)
+                    using (ManagementObjectCollection powerPlans = powerPlanClass.GetInstances())
                     {
-                        if ((bool)powerPlan["IsActive"])
+                        foreach (ManagementObject powerPlan in powerPlans)
                         {
-                            // Update the label with the current power plan
-                            pwrCurrentPlan.Text = $"Current Power Plan: {powerPlan["ElementName"]}";
-                            break;
+                            if ((bool)powerPlan["IsActive"])
+                            {
+                                // Update the label with the current power plan
+                                pwrCurrentPlan.Invoke((MethodInvoker)(() => pwrCurrentPlan.Text = $"Current Power Plan: {powerPlan["ElementName"]}"));
+                                break;
+                            }
                         }
                     }
                 }
