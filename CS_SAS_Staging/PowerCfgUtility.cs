@@ -82,18 +82,40 @@ namespace CS_SAS_Staging
 
         private string ParseSetting(string output, string settingName)
         {
-            // Adjust the regex to match the 'Current AC Power Setting Index' line
             Regex regex = new Regex(settingName + @"[\s\S]+?Current AC Power Setting Index: (?<value>\d+)");
             Match match = regex.Match(output);
 
             if (match.Success)
             {
                 int seconds = int.Parse(match.Groups["value"].Value, System.Globalization.NumberStyles.HexNumber);
-                TimeSpan time = TimeSpan.FromSeconds(seconds);
-                return time.ToString(@"hh\:mm\:ss");
+
+                // Convert seconds into a user-friendly format
+                return ConvertSecondsToFriendlyDuration(seconds);
             }
 
-            return "Error: Data Parse Failure";
+            return "Error: No Data";
+        }
+        private string ConvertSecondsToFriendlyDuration(int seconds)
+        {
+            if (seconds == 0)
+            {
+                return "Never";
+            }
+
+            TimeSpan time = TimeSpan.FromSeconds(seconds);
+
+            if (time.TotalHours >= 1)
+            {
+                return $"{time.Hours} Hour{(time.Hours > 1 ? "s" : "")}";
+            }
+            else if (time.TotalMinutes >= 1)
+            {
+                return $"{time.Minutes} Minute{(time.Minutes > 1 ? "s" : "")}";
+            }
+            else
+            {
+                return $"{time.Seconds} Second{(time.Seconds > 1 ? "s" : "")}";
+            }
         }
     }
 }
