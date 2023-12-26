@@ -116,12 +116,9 @@
             label17 = new Label();
             usrCollect = new ListBox();
             label16 = new Label();
-            rdpSet2Query = new Label();
             rdpSet1Query = new Label();
-            rdpFwRules = new Button();
             disableRDP = new Button();
             enableRDP = new Button();
-            label13 = new Label();
             label12 = new Label();
             label11 = new Label();
             setToHp = new Button();
@@ -137,6 +134,7 @@
             panel6 = new Panel();
             psLogWindow = new Label();
             csLogClear = new Button();
+            button1 = new Button();
             statusStrip1.SuspendLayout();
             menuStrip1.SuspendLayout();
             tabMain.SuspendLayout();
@@ -196,7 +194,7 @@
             // saveReportToolStripMenuItem
             // 
             saveReportToolStripMenuItem.Name = "saveReportToolStripMenuItem";
-            saveReportToolStripMenuItem.Size = new Size(136, 22);
+            saveReportToolStripMenuItem.Size = new Size(180, 22);
             saveReportToolStripMenuItem.Text = "Save Report";
             // 
             // shellToolStripMenuItem
@@ -735,6 +733,7 @@
             // 
             // tabWinMenu
             // 
+            tabWinMenu.Controls.Add(button1);
             tabWinMenu.Controls.Add(scriptWindowsUpdate);
             tabWinMenu.Controls.Add(controlWindowsUpdate);
             tabWinMenu.Controls.Add(panel7);
@@ -755,12 +754,9 @@
             tabWinMenu.Controls.Add(label17);
             tabWinMenu.Controls.Add(usrCollect);
             tabWinMenu.Controls.Add(label16);
-            tabWinMenu.Controls.Add(rdpSet2Query);
             tabWinMenu.Controls.Add(rdpSet1Query);
-            tabWinMenu.Controls.Add(rdpFwRules);
             tabWinMenu.Controls.Add(disableRDP);
             tabWinMenu.Controls.Add(enableRDP);
-            tabWinMenu.Controls.Add(label13);
             tabWinMenu.Controls.Add(label12);
             tabWinMenu.Controls.Add(label11);
             tabWinMenu.Controls.Add(setToHp);
@@ -959,34 +955,15 @@
             label16.TabIndex = 50;
             label16.Text = "SAM Management";
             // 
-            // rdpSet2Query
-            // 
-            rdpSet2Query.AutoSize = true;
-            rdpSet2Query.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            rdpSet2Query.Location = new Point(58, 385);
-            rdpSet2Query.Name = "rdpSet2Query";
-            rdpSet2Query.Size = new Size(76, 15);
-            rdpSet2Query.TabIndex = 49;
-            rdpSet2Query.Text = "Query Failed";
-            // 
             // rdpSet1Query
             // 
             rdpSet1Query.AutoSize = true;
             rdpSet1Query.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            rdpSet1Query.Location = new Point(58, 341);
+            rdpSet1Query.Location = new Point(7, 301);
             rdpSet1Query.Name = "rdpSet1Query";
             rdpSet1Query.Size = new Size(76, 15);
             rdpSet1Query.TabIndex = 48;
             rdpSet1Query.Text = "Query Failed";
-            // 
-            // rdpFwRules
-            // 
-            rdpFwRules.Location = new Point(53, 284);
-            rdpFwRules.Name = "rdpFwRules";
-            rdpFwRules.Size = new Size(89, 23);
-            rdpFwRules.TabIndex = 47;
-            rdpFwRules.Text = "Add F/W Rule";
-            rdpFwRules.UseVisualStyleBackColor = true;
             // 
             // disableRDP
             // 
@@ -1006,23 +983,14 @@
             enableRDP.Text = "Enable";
             enableRDP.UseVisualStyleBackColor = true;
             // 
-            // label13
-            // 
-            label13.AutoSize = true;
-            label13.Location = new Point(44, 364);
-            label13.Name = "label13";
-            label13.Size = new Size(108, 15);
-            label13.TabIndex = 44;
-            label13.Text = "Setting 2 (Win10+):";
-            // 
             // label12
             // 
             label12.AutoSize = true;
-            label12.Location = new Point(29, 321);
+            label12.Location = new Point(7, 281);
             label12.Name = "label12";
-            label12.Size = new Size(139, 15);
+            label12.Size = new Size(67, 15);
             label12.TabIndex = 43;
-            label12.Text = "Setting 1 (Control Panel):";
+            label12.Text = "RDP Status:";
             // 
             // label11
             // 
@@ -1154,6 +1122,15 @@
             csLogClear.UseVisualStyleBackColor = true;
             csLogClear.Click += csLogClear_Click;
             // 
+            // button1
+            // 
+            button1.Location = new Point(7, 385);
+            button1.Name = "button1";
+            button1.Size = new Size(179, 23);
+            button1.TabIndex = 72;
+            button1.Text = "Re-Run Query";
+            button1.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -1266,14 +1243,11 @@
         private Button setZeroTimeout;
         private Panel panel2;
         private Label rdpSet1Query;
-        private Button rdpFwRules;
         private Button disableRDP;
         private Button enableRDP;
-        private Label label13;
         private Label label12;
         private Label label11;
         private Label label16;
-        private Label rdpSet2Query;
         private Label label18;
         private Label label17;
         private ListBox usrCollect;
@@ -1293,5 +1267,6 @@
         private Panel panel7;
         private Button scriptWindowsUpdate;
         private Button controlWindowsUpdate;
+        private Button button1;
     }
 }
