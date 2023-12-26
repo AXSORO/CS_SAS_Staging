@@ -33,7 +33,7 @@
             statusStrip1 = new StatusStrip();
             toolStripProgressBar1 = new ToolStripProgressBar();
             tsPsStatLabel = new ToolStripStatusLabel();
-            menuStrip1 = new MenuStrip();
+            menuStrip1 = new System.Windows.Forms.MenuStrip();
             fileToolStripMenuItem = new ToolStripMenuItem();
             saveReportToolStripMenuItem = new ToolStripMenuItem();
             shellToolStripMenuItem = new ToolStripMenuItem();
@@ -47,7 +47,6 @@
             eventVirewToolStripMenuItem = new ToolStripMenuItem();
             performanceMonitorToolStripMenuItem = new ToolStripMenuItem();
             controlPanelOptionsToolStripMenuItem = new ToolStripMenuItem();
-            deviceManagerToolStripMenuItem = new ToolStripMenuItem();
             mSConfigToolStripMenuItem = new ToolStripMenuItem();
             helpToolStripMenuItem = new ToolStripMenuItem();
             aboutToolStripMenuItem = new ToolStripMenuItem();
@@ -194,7 +193,7 @@
             // saveReportToolStripMenuItem
             // 
             saveReportToolStripMenuItem.Name = "saveReportToolStripMenuItem";
-            saveReportToolStripMenuItem.Size = new Size(136, 22);
+            saveReportToolStripMenuItem.Size = new Size(180, 22);
             saveReportToolStripMenuItem.Text = "Save Report";
             // 
             // shellToolStripMenuItem
@@ -226,57 +225,50 @@
             // localUserManagerToolStripMenuItem
             // 
             localUserManagerToolStripMenuItem.Name = "localUserManagerToolStripMenuItem";
-            localUserManagerToolStripMenuItem.Size = new Size(200, 22);
+            localUserManagerToolStripMenuItem.Size = new Size(188, 22);
             localUserManagerToolStripMenuItem.Text = "Local User Manager";
             // 
             // windowsUpdateToolStripMenuItem
             // 
             windowsUpdateToolStripMenuItem.Name = "windowsUpdateToolStripMenuItem";
-            windowsUpdateToolStripMenuItem.Size = new Size(200, 22);
+            windowsUpdateToolStripMenuItem.Size = new Size(188, 22);
             windowsUpdateToolStripMenuItem.Text = "Windows Update";
             // 
             // groupPolicyEditorToolStripMenuItem
             // 
             groupPolicyEditorToolStripMenuItem.Name = "groupPolicyEditorToolStripMenuItem";
-            groupPolicyEditorToolStripMenuItem.Size = new Size(200, 22);
+            groupPolicyEditorToolStripMenuItem.Size = new Size(188, 22);
             groupPolicyEditorToolStripMenuItem.Text = "Group Policy Editor";
             // 
             // diskManagementToolStripMenuItem
             // 
             diskManagementToolStripMenuItem.Name = "diskManagementToolStripMenuItem";
-            diskManagementToolStripMenuItem.Size = new Size(200, 22);
+            diskManagementToolStripMenuItem.Size = new Size(188, 22);
             diskManagementToolStripMenuItem.Text = "Disk Management";
             // 
             // eventVirewToolStripMenuItem
             // 
             eventVirewToolStripMenuItem.Name = "eventVirewToolStripMenuItem";
-            eventVirewToolStripMenuItem.Size = new Size(200, 22);
+            eventVirewToolStripMenuItem.Size = new Size(188, 22);
             eventVirewToolStripMenuItem.Text = "Event Viewer";
             eventVirewToolStripMenuItem.Click += eventVirewToolStripMenuItem_Click;
             // 
             // performanceMonitorToolStripMenuItem
             // 
             performanceMonitorToolStripMenuItem.Name = "performanceMonitorToolStripMenuItem";
-            performanceMonitorToolStripMenuItem.Size = new Size(200, 22);
+            performanceMonitorToolStripMenuItem.Size = new Size(188, 22);
             performanceMonitorToolStripMenuItem.Text = "Performance Monitor";
             // 
             // controlPanelOptionsToolStripMenuItem
             // 
-            controlPanelOptionsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { deviceManagerToolStripMenuItem });
             controlPanelOptionsToolStripMenuItem.Name = "controlPanelOptionsToolStripMenuItem";
-            controlPanelOptionsToolStripMenuItem.Size = new Size(200, 22);
-            controlPanelOptionsToolStripMenuItem.Text = "Control Panel Options...";
-            // 
-            // deviceManagerToolStripMenuItem
-            // 
-            deviceManagerToolStripMenuItem.Name = "deviceManagerToolStripMenuItem";
-            deviceManagerToolStripMenuItem.Size = new Size(159, 22);
-            deviceManagerToolStripMenuItem.Text = "Device Manager";
+            controlPanelOptionsToolStripMenuItem.Size = new Size(188, 22);
+            controlPanelOptionsToolStripMenuItem.Text = "Device Manager";
             // 
             // mSConfigToolStripMenuItem
             // 
             mSConfigToolStripMenuItem.Name = "mSConfigToolStripMenuItem";
-            mSConfigToolStripMenuItem.Size = new Size(200, 22);
+            mSConfigToolStripMenuItem.Size = new Size(188, 22);
             mSConfigToolStripMenuItem.Text = "MSConfig";
             // 
             // helpToolStripMenuItem
@@ -289,7 +281,7 @@
             // aboutToolStripMenuItem
             // 
             aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            aboutToolStripMenuItem.Size = new Size(105, 22);
+            aboutToolStripMenuItem.Size = new Size(180, 22);
             aboutToolStripMenuItem.Text = "about";
             // 
             // tabMain
@@ -1167,7 +1159,7 @@
         private StatusStrip statusStrip1;
         private ToolStripProgressBar toolStripProgressBar1;
         private ToolStripStatusLabel tsPsStatLabel;
-        private MenuStrip menuStrip1;
+        private System.Windows.Forms.MenuStrip menuStrip1;
         private ToolStripMenuItem fileToolStripMenuItem;
         private ToolStripMenuItem shellToolStripMenuItem;
         private ToolStripMenuItem windowsToolStripMenuItem;
@@ -1182,7 +1174,6 @@
         private ToolStripMenuItem openCMDWindowToolStripMenuItem;
         private ToolStripMenuItem performanceMonitorToolStripMenuItem;
         private ToolStripMenuItem controlPanelOptionsToolStripMenuItem;
-        private ToolStripMenuItem deviceManagerToolStripMenuItem;
         private ToolStripMenuItem mSConfigToolStripMenuItem;
         private ToolStripMenuItem aboutToolStripMenuItem;
         private TabControl tabMain;

@@ -810,11 +810,13 @@ namespace CS_SAS_Staging
             await CheckRemoteAccess.ChgRemoteAccessAsync(true, LogToCsLog);
             await CheckRemoteAccess.CheckRDPStatusAsync(rdpSetQuery);
         }
+        // when button is clicked - enable rdp using CheckRemoteAccess class and requery
         private async void disableRDP_Click(object sender, EventArgs e)
         {
             await CheckRemoteAccess.ChgRemoteAccessAsync(false, LogToCsLog);
             await CheckRemoteAccess.CheckRDPStatusAsync(rdpSetQuery);
         }
+        // when button is clicked - disable rdp using CheckRemoteAccess class and requery
         private void pwrLabel_Click(object sender, EventArgs e)
         {
 
