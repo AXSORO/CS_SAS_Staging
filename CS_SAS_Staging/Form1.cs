@@ -77,7 +77,6 @@ namespace CS_SAS_Staging
             QueryMachineInfo();
             QueryNetworkAdapters();
             QueryFirewallStatus();
-            QueryPowerSettings();
             QueryUsers();
         }
         // Action for pulling machine hostname and displaying it in appropriate label
@@ -342,77 +341,6 @@ namespace CS_SAS_Staging
             return dnsServers.FirstOrDefault() ?? "N/A";
         }
         // Grabbing / storing IP information for display. 
-        private void QueryPowerSettings()
-        {
-            try
-            {
-                // Create a WMI query to retrieve power settings
-                ObjectQuery query = new ObjectQuery("SELECT * FROM Win32_Desktop");
-
-                using (ManagementObjectSearcher searcher = new ManagementObjectSearcher(query))
-                {
-                    ManagementObjectCollection settings = searcher.Get();
-
-                    string screenOffInterval = "";
-                    string sleepInterval = "";
-
-                    foreach (ManagementObject setting in settings)
-                    {
-                        // Check if the setting is related to monitor standby or sleep timeout
-                        if (setting["ElementName"] != null)
-                        {
-                            string elementName = setting["ElementName"].ToString().ToLower();
-
-                            if (elementName.Contains("standby") || elementName.Contains("sleep"))
-                            {
-                                // Get the interval in seconds
-                                int intervalInSeconds = Convert.ToInt32(setting["SettingIndex"]);
-
-                                // Convert seconds to minutes
-                                int intervalInMinutes = intervalInSeconds / 60;
-
-                                // Determine the setting and update the corresponding variable
-                                if (elementName.Contains("standby"))
-                                {
-                                    screenOffInterval = $"Screen Off Interval: {intervalInMinutes} minutes";
-                                }
-                                else if (elementName.Contains("sleep"))
-                                {
-                                    sleepInterval = $"Sleep Interval: {intervalInMinutes} minutes";
-                                }
-                            }
-                        }
-                    }
-
-                    // Update the labels with the power settings
-                    pwrScrnOff.Invoke((MethodInvoker)(() => pwrScrnOff.Text = screenOffInterval));
-                    pwrSleep.Invoke((MethodInvoker)(() => pwrSleep.Text = sleepInterval));
-                }
-
-                // Get the current power plan
-                using (ManagementClass powerPlanClass = new ManagementClass("Win32_PowerPlan"))
-                {
-                    using (ManagementObjectCollection powerPlans = powerPlanClass.GetInstances())
-                    {
-                        foreach (ManagementObject powerPlan in powerPlans)
-                        {
-                            if ((bool)powerPlan["IsActive"])
-                            {
-                                // Update the label with the current power plan
-                                pwrCurrentPlan.Invoke((MethodInvoker)(() => pwrCurrentPlan.Text = $"{powerPlan["ElementName"]}"));
-                                break;
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                // Handle exceptions and log errors
-                LogToCsLog($"\nError querying Power Settings: {ex.Message}\n\n");
-            }
-        }
-        // Querying current power settings for display on frontend
         private string GetSecondaryDNS(NetworkInterface adapter)
         {
             var dnsServers = adapter.GetIPProperties().DnsAddresses
