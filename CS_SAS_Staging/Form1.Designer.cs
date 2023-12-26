@@ -116,7 +116,7 @@
             label17 = new Label();
             usrCollect = new ListBox();
             label16 = new Label();
-            rdpSet1Query = new Label();
+            rdpSetQuery = new Label();
             disableRDP = new Button();
             enableRDP = new Button();
             label12 = new Label();
@@ -754,7 +754,7 @@
             tabWinMenu.Controls.Add(label17);
             tabWinMenu.Controls.Add(usrCollect);
             tabWinMenu.Controls.Add(label16);
-            tabWinMenu.Controls.Add(rdpSet1Query);
+            tabWinMenu.Controls.Add(rdpSetQuery);
             tabWinMenu.Controls.Add(disableRDP);
             tabWinMenu.Controls.Add(enableRDP);
             tabWinMenu.Controls.Add(label12);
@@ -955,15 +955,15 @@
             label16.TabIndex = 50;
             label16.Text = "SAM Management";
             // 
-            // rdpSet1Query
+            // rdpSetQuery
             // 
-            rdpSet1Query.AutoSize = true;
-            rdpSet1Query.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            rdpSet1Query.Location = new Point(7, 301);
-            rdpSet1Query.Name = "rdpSet1Query";
-            rdpSet1Query.Size = new Size(76, 15);
-            rdpSet1Query.TabIndex = 48;
-            rdpSet1Query.Text = "Query Failed";
+            rdpSetQuery.AutoSize = true;
+            rdpSetQuery.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            rdpSetQuery.Location = new Point(7, 301);
+            rdpSetQuery.Name = "rdpSetQuery";
+            rdpSetQuery.Size = new Size(76, 15);
+            rdpSetQuery.TabIndex = 48;
+            rdpSetQuery.Text = "Query Failed";
             // 
             // disableRDP
             // 
@@ -1242,7 +1242,7 @@
         private Button setToHp;
         private Button setZeroTimeout;
         private Panel panel2;
-        private Label rdpSet1Query;
+        private Label rdpSetQuery;
         private Button disableRDP;
         private Button enableRDP;
         private Label label12;

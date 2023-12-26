@@ -81,6 +81,7 @@ namespace CS_SAS_Staging
             QueryNetworkAdapters();
             QueryFirewallStatus();
             QueryPowerSettings();
+            QueryRDPSettings();
             QueryUsers();
         }
         // Action for pulling machine hostname and displaying it in appropriate label
@@ -133,21 +134,19 @@ namespace CS_SAS_Staging
             }
 
             // Simulate some delay to represent the query process
-            await Task.Delay(250);
 
             return users;
         }
         // Function of parsing information grabbed from user query, avoiding application hangs while it runs
         private async void QueryUsers()
         {
-            csLog.AppendText("Query: WinNT:// In Progress\n");
-            csLog.AppendText("\nPlease Wait, Querying Users...\n");
+            csLog.AppendText("Query: WinNT:// In Progress...\n");
 
             List<string> users = await GetUsersAsync();
 
             UpdateUserListBox(users);
 
-            csLog.AppendText("User Query: Complete\n");
+            csLog.AppendText("Query: Userlist Complete.\n");
         }
         //Display users found from query in proper ListBox
         private void UpdateUserListBox(List<string> users)
@@ -256,6 +255,12 @@ namespace CS_SAS_Staging
             }
         }
         // Assistance with logging
+        private async void QueryRDPSettings()
+        {
+            await CheckRemoteAccess.CheckRDPStatusAsync(rdpSetQuery);
+            LogToCsLog("Query: RDP State returned.\n");
+        }
+        // Use CheckRemoteAccess class for checking state of RDP - then print to label
         private void LogToCsLog(string logText)
         {
             // Append the log text to the "csLog" rich text box
