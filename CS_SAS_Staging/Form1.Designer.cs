@@ -193,7 +193,7 @@
             // saveReport
             // 
             saveReport.Name = "saveReport";
-            saveReport.Size = new Size(180, 22);
+            saveReport.Size = new Size(136, 22);
             saveReport.Text = "Save Report";
             // 
             // shellToolStripMenuItem
@@ -208,12 +208,14 @@
             psLaunch.Name = "psLaunch";
             psLaunch.Size = new Size(180, 22);
             psLaunch.Text = "Open P/S Window";
+            psLaunch.Click += psLaunch_Click;
             // 
             // cmdLaunch
             // 
             cmdLaunch.Name = "cmdLaunch";
             cmdLaunch.Size = new Size(180, 22);
             cmdLaunch.Text = "Open CMD Window";
+            cmdLaunch.Click += cmdLaunch_Click;
             // 
             // windowsToolStripMenuItem
             // 
@@ -227,49 +229,56 @@
             lusrmgrLaunch.Name = "lusrmgrLaunch";
             lusrmgrLaunch.Size = new Size(188, 22);
             lusrmgrLaunch.Text = "Local User Manager";
+            lusrmgrLaunch.Click += lusrmgrLaunch_Click;
             // 
             // controlUpdateLaunch
             // 
             controlUpdateLaunch.Name = "controlUpdateLaunch";
             controlUpdateLaunch.Size = new Size(188, 22);
             controlUpdateLaunch.Text = "Windows Update";
+            controlUpdateLaunch.Click += controlUpdateLaunch_Click;
             // 
             // gpeditLaunch
             // 
             gpeditLaunch.Name = "gpeditLaunch";
             gpeditLaunch.Size = new Size(188, 22);
             gpeditLaunch.Text = "Group Policy Editor";
+            gpeditLaunch.Click += gpeditLaunch_Click;
             // 
             // diskmgmtLaunch
             // 
             diskmgmtLaunch.Name = "diskmgmtLaunch";
             diskmgmtLaunch.Size = new Size(188, 22);
             diskmgmtLaunch.Text = "Disk Management";
+            diskmgmtLaunch.Click += diskmgmtLaunch_Click;
             // 
             // eventvwrLaunch
             // 
             eventvwrLaunch.Name = "eventvwrLaunch";
             eventvwrLaunch.Size = new Size(188, 22);
             eventvwrLaunch.Text = "Event Viewer";
-            eventvwrLaunch.Click += eventVirewToolStripMenuItem_Click;
+            eventvwrLaunch.Click += eventvwrLaunch_Click;
             // 
             // perfmonLaunch
             // 
             perfmonLaunch.Name = "perfmonLaunch";
             perfmonLaunch.Size = new Size(188, 22);
             perfmonLaunch.Text = "Performance Monitor";
+            perfmonLaunch.Click += perfmonLaunch_Click;
             // 
             // devmgmtLaunch
             // 
             devmgmtLaunch.Name = "devmgmtLaunch";
             devmgmtLaunch.Size = new Size(188, 22);
             devmgmtLaunch.Text = "Device Manager";
+            devmgmtLaunch.Click += devmgmtLaunch_Click;
             // 
             // msconfigLaunch
             // 
             msconfigLaunch.Name = "msconfigLaunch";
             msconfigLaunch.Size = new Size(188, 22);
             msconfigLaunch.Text = "MSConfig";
+            msconfigLaunch.Click += msconfigLaunch_Click;
             // 
             // helpToolStripMenuItem
             // 
@@ -281,7 +290,7 @@
             // aboutToolStripMenuItem
             // 
             aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            aboutToolStripMenuItem.Size = new Size(180, 22);
+            aboutToolStripMenuItem.Size = new Size(105, 22);
             aboutToolStripMenuItem.Text = "about";
             // 
             // tabMain
