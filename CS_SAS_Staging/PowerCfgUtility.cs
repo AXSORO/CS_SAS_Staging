@@ -65,7 +65,7 @@ namespace CS_SAS_Staging
                 return $"{match.Groups["name"].Value.Trim()} (GUID: {match.Groups["guid"].Value.Trim()})";
             }
 
-            return "N/A";
+            return "Error: No Data";
         }
 
         private string GetScreenTimeout()
@@ -92,7 +92,7 @@ namespace CS_SAS_Staging
                 return time.ToString(@"hh\:mm\:ss");
             }
 
-            return "N/A";
+            return "Error: No Data";
         }
     }
 }

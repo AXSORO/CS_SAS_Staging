@@ -12,6 +12,7 @@ using System.Management; // Assisting with system changes
 using System.DirectoryServices; // Using directory services to pull local user accounts for display 
 using System.DirectoryServices.AccountManagement; // Using account management services to pull more minute accounr details
 using System.Runtime.InteropServices; // Assisting with system management cases
+using Newtonsoft.Json; // Json extension for data management used by the PowerCfgUtility class
 using static CS_SAS_Staging.NetworkAdapter; // This is calling a secondary class I created to help parsing of the Network Adapter information 
 using static CS_SAS_Staging.PowerCfgUtility; // Another internal class made that helps collect and parse the data using powercfg - WMI is unreliable 
 
@@ -37,13 +38,13 @@ namespace CS_SAS_Staging
             await Task.Delay(200);
             LogToCsLog("VisualBasic Scripting Initalized.\n");
             await Task.Delay(250);
-            LogToCsLog("System.Diagnostics Library Loaded\n");
+            LogToCsLog("System.Diagnostics Library Loaded.\n");
             await Task.Delay(100);
             LogToCsLog("InteropServices Library Loaded.\n");
             await Task.Delay(250);
-            LogToCsLog("System.Net.Sockets Library Loaded\n");
+            LogToCsLog("System.Net.Sockets Library Loaded.\n");
             await Task.Delay(250);
-            LogToCsLog("FirewallAPI Loaded\n \n");
+            LogToCsLog("FirewallAPI Loaded.\n \n");
             await Task.Delay(250);
             LogToCsLog("Running Queries...\n");
             await Task.Delay(1000);
@@ -78,6 +79,7 @@ namespace CS_SAS_Staging
             QueryMachineInfo();
             QueryNetworkAdapters();
             QueryFirewallStatus();
+            QueryPowerSettings();
             QueryUsers();
         }
         // Action for pulling machine hostname and displaying it in appropriate label
@@ -351,7 +353,27 @@ namespace CS_SAS_Staging
             // Skip the first DNS server to get the secondary one
             return dnsServers.Skip(1).FirstOrDefault() ?? "N/A";
         }
-        // WIP or Unused
+        // Grabbing / storing IP information for display. 
+        private void QueryPowerSettings()
+        {
+            try
+            {
+                LogToCsLog("Query: Power Settings\n");
+                PowerCfgUtility configUtility = new PowerCfgUtility();
+                string jsonOutput = configUtility.GetPowerSettings();
+                var powerSettings = JsonConvert.DeserializeObject<Dictionary<string, string>>(jsonOutput);
+
+                // Update labels
+                pwrScrnOff.Text = powerSettings.ContainsKey("Screen Timeout") ? powerSettings["Screen Timeout"] : "None";
+                pwrSleep.Text = powerSettings.ContainsKey("Sleep Timeout") ? powerSettings["Sleep Timeout"] : "None";
+                pwrCurrentPlan.Text = powerSettings.ContainsKey("Active Power Scheme") ? powerSettings["Active Power Scheme"] : "None";
+            }
+            catch (Exception ex)
+            {
+                LogToCsLog($"Error querying power settings: {ex.Message}\n");
+            }
+        }
+        // Use the PowerCfgUtility class to query the power settings and display them in the appropriate labels
         private void toolStripStatusLabel1_Click(object sender, EventArgs e)
         {
 
