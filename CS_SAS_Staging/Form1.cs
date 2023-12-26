@@ -13,6 +13,7 @@ using System.DirectoryServices; // Using directory services to pull local user a
 using System.DirectoryServices.AccountManagement; // Using account management services to pull more minute accounr details
 using System.Runtime.InteropServices; // Assisting with system management cases
 using static CS_SAS_Staging.NetworkAdapter; // This is calling a secondary class I created to help parsing of the Network Adapter information 
+using static CS_SAS_Staging.PowerCfgUtility; // Another internal class made that helps collect and parse the data using powercfg - WMI is unreliable 
 
 //Start main application
 namespace CS_SAS_Staging
