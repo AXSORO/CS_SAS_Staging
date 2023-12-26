@@ -1,5 +1,6 @@
 // Dependencies being called 
 using System;
+using System.Text; // assisting with StringBuilder for calling command line apps (batch)
 using System.Collections.ObjectModel;
 using System.Diagnostics; // Assisting with system management 
 using System.Net.NetworkInformation; // Assisting with network information queries 
@@ -727,15 +728,87 @@ namespace CS_SAS_Staging
             label.Text = success ? successText : "Failure";
             label.ForeColor = success ? Color.Green : Color.Red;
         }
+        // Update labels after pingtest is ran
+        private void setZeroTimeout_Click(object sender, EventArgs e)
+        {
+            string[] commands = { "-Change monitor-timeout-ac 0", "-Change standby-timeout-ac 0" };
+            bool isError = false;
 
+            foreach (var command in commands)
+            {
+                string result = ExecutePowerCfgCommand(command);
+                if (result.Contains("Invalid Parameters -- try \"/?\" for help"))
+                {
+                    isError = true;
+                    break;
+                }
+            }
+
+            if (isError)
+            {
+                LogToCsLog("Error: Failure applying power settings.");
+            }
+            else
+            {
+                LogToCsLog("Monitor and standby timeouts set to zero.");
+                QueryPowerSettings();
+            }
+        }
+        // When button is clicked, set sleep / monitor timeouts to 0 - using ExecutePowerCfgCommand method
+        private void setToHp_Click(object sender, EventArgs e)
+        {
+            string highPerformancePowerSchemeGuid = "8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c";
+            string command = $"/s {highPerformancePowerSchemeGuid}";
+
+            string result = ExecutePowerCfgCommand(command);
+
+            if (result.Contains("Invalid Parameters -- try \"/?\" for help"))
+            {
+                LogToCsLog("Power Plan: High Performance not found");
+            }
+            else
+            {
+                LogToCsLog("Power Plan: Set to High Performance");
+                QueryPowerSettings();
+            }
+        }
+        // When button is clicked, set power plan to High performance - using ExecutePowerCfgCommand method
+        private string ExecutePowerCfgCommand(string arguments)
+        {
+            ProcessStartInfo startInfo = new ProcessStartInfo
+            {
+                FileName = "powercfg",
+                Arguments = arguments,
+                UseShellExecute = false,
+                RedirectStandardOutput = true,
+                CreateNoWindow = true
+            };
+
+            using (Process process = new Process())
+            {
+                process.StartInfo = startInfo;
+                process.Start();
+
+                StringBuilder output = new StringBuilder();
+                while (!process.StandardOutput.EndOfStream)
+                {
+                    string line = process.StandardOutput.ReadLine();
+                    output.AppendLine(line);
+                }
+
+                return output.ToString();
+            }
+        }
+        // invoked when changing power settings
         private void pwrLabel_Click(object sender, EventArgs e)
         {
 
         }
-
+        // WIP or Unused
         private void tabWinMenu_Click(object sender, EventArgs e)
         {
 
         }
+        // WIP or unused
     }
 }

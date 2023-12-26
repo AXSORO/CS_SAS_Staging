@@ -124,8 +124,8 @@
             label13 = new Label();
             label12 = new Label();
             label11 = new Label();
-            stockPwrPlan = new Button();
-            setMaxPwr = new Button();
+            setToHp = new Button();
+            setZeroTimeout = new Button();
             panel2 = new Panel();
             pwrCurrentPlan = new Label();
             pwrSleep = new Label();
@@ -763,8 +763,8 @@
             tabWinMenu.Controls.Add(label13);
             tabWinMenu.Controls.Add(label12);
             tabWinMenu.Controls.Add(label11);
-            tabWinMenu.Controls.Add(stockPwrPlan);
-            tabWinMenu.Controls.Add(setMaxPwr);
+            tabWinMenu.Controls.Add(setToHp);
+            tabWinMenu.Controls.Add(setZeroTimeout);
             tabWinMenu.Controls.Add(panel2);
             tabWinMenu.Controls.Add(pwrCurrentPlan);
             tabWinMenu.Controls.Add(pwrSleep);
@@ -1033,23 +1033,25 @@
             label11.TabIndex = 42;
             label11.Text = "Remote Desktop Protocol:";
             // 
-            // stockPwrPlan
+            // setToHp
             // 
-            stockPwrPlan.Location = new Point(5, 147);
-            stockPwrPlan.Name = "stockPwrPlan";
-            stockPwrPlan.Size = new Size(183, 23);
-            stockPwrPlan.TabIndex = 41;
-            stockPwrPlan.Text = "Revert to Defaults";
-            stockPwrPlan.UseVisualStyleBackColor = true;
+            setToHp.Location = new Point(5, 147);
+            setToHp.Name = "setToHp";
+            setToHp.Size = new Size(183, 23);
+            setToHp.TabIndex = 41;
+            setToHp.Text = "Set to High Performance ";
+            setToHp.UseVisualStyleBackColor = true;
+            setToHp.Click += setToHp_Click;
             // 
-            // setMaxPwr
+            // setZeroTimeout
             // 
-            setMaxPwr.Location = new Point(5, 176);
-            setMaxPwr.Name = "setMaxPwr";
-            setMaxPwr.Size = new Size(183, 23);
-            setMaxPwr.TabIndex = 40;
-            setMaxPwr.Text = "High Performance Plan";
-            setMaxPwr.UseVisualStyleBackColor = true;
+            setZeroTimeout.Location = new Point(5, 176);
+            setZeroTimeout.Name = "setZeroTimeout";
+            setZeroTimeout.Size = new Size(183, 23);
+            setZeroTimeout.TabIndex = 40;
+            setZeroTimeout.Text = "Set Timeouts to 0";
+            setZeroTimeout.UseVisualStyleBackColor = true;
+            setZeroTimeout.Click += setZeroTimeout_Click;
             // 
             // panel2
             // 
@@ -1260,8 +1262,8 @@
         private Label pwrSleep;
         private Label label9;
         private Label pwrScrnOff;
-        private Button stockPwrPlan;
-        private Button setMaxPwr;
+        private Button setToHp;
+        private Button setZeroTimeout;
         private Panel panel2;
         private Label rdpSet1Query;
         private Button rdpFwRules;
