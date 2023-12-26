@@ -831,19 +831,19 @@ namespace CS_SAS_Staging
         
         private void lusrmgrLaunch_Click(object sender, EventArgs e)
         {
-            MenuStrip.LusrMgr();
+            MenuStrip.OpenMSCFile("lusrmgr.msc");
         }
         private void controlUpdateLaunch_Click(object sender, EventArgs e)
         {
-            MenuStrip.ControlUpdate();
+            MenuStrip.OpenControlPanelSection("update");
         }
         private void gpeditLaunch_Click(object sender, EventArgs e)
         {
-            MenuStrip.GpEdit();
+            MenuStrip.OpenMSCFile("gpedit.msc");
         }
         private void diskmgmtLaunch_Click(object sender, EventArgs e)
         {
-            MenuStrip.DiskMgmt();
+            MenuStrip.OpenMSCFile("diskmgmt.msc");
         }
         private void eventvwrLaunch_Click(object sender, EventArgs e)
         {
@@ -863,7 +863,7 @@ namespace CS_SAS_Staging
         }
         private void devmgmtLaunch_Click(object sender, EventArgs e)
         {
-            MenuStrip.DevMgmt();
+            MenuStrip.OpenMSCFile("devmgmt.msc");
         }
         private void msconfigLaunch_Click(object sender, EventArgs e)
         {

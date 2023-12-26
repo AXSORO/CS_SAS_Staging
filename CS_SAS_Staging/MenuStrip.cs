@@ -9,7 +9,43 @@ namespace CS_SAS_Staging
 {
     internal class MenuStrip
     {
-      // "File" section of toolstrip
+        public static void OpenMSCFile(string mscFileName)
+        {
+            ProcessStartInfo startInfo = new ProcessStartInfo
+            {
+                FileName = "mmc.exe",
+                Arguments = mscFileName,
+                UseShellExecute = false
+            };
+
+            try
+            {
+                Process.Start(startInfo);
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions
+                // For example, log the error message
+                Console.WriteLine("Error launching MSC file: " + ex.Message);
+            }
+        }
+        // Logic used to launch the settings that rely on MMC to run
+        public static void OpenControlPanelSection(string controlPanelCommand)
+        {
+            try
+            {
+                Process.Start("control", controlPanelCommand);
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions
+                Console.WriteLine($"Error opening Control Panel section: {ex.Message}");
+            }
+        }
+        // Logic used to launch the control panel-based toolstrip option(s)
+        //
+        // "File" section of toolstrip
+        //
         public static void SaveReport()
         {
 
@@ -28,22 +64,6 @@ namespace CS_SAS_Staging
       //
       // "Windows" section of toolstrip
       //
-        public static void LusrMgr()
-        {
-            Process.Start("lusrmgr.msc");
-        }
-        public static void ControlUpdate()
-        {
-            Process.Start("Control Update");
-        }
-        public static void GpEdit()
-        {
-            Process.Start("gpedit.msc");
-        }
-        public static void DiskMgmt()
-        {
-            Process.Start("diskmgmt.msc");
-        }
         public static void EventViewer()
         {
             Process.Start("eventvwr.exe");
@@ -51,10 +71,6 @@ namespace CS_SAS_Staging
         public static void PerfMon()
         {
             Process.Start("perfmon.exe");
-        }
-        public static void DevMgmt()
-        {
-            Process.Start("devmgmt.msc");
         }
         public static void MsConfig()
         {
