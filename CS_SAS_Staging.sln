@@ -5,7 +5,7 @@ VisualStudioVersion = 17.8.34309.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CS_SAS_Staging", "CS_SAS_Staging\CS_SAS_Staging.csproj", "{C56331A4-6F1C-4EE3-B94E-E4B357FDBD7B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowerCfgCollection", "PowerCfgCollection\PowerCfgCollection.csproj", "{2D5A46D6-F7A5-4F03-9665-2ECE15DF27D4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PowercfgUtility", "PowerCfgCollection\PowercfgUtility.csproj", "{2D5A46D6-F7A5-4F03-9665-2ECE15DF27D4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
