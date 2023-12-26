@@ -746,11 +746,11 @@ namespace CS_SAS_Staging
 
             if (isError)
             {
-                LogToCsLog("Error: Failure applying power settings.");
+                LogToCsLog("Error: Failure applying power settings.\n");
             }
             else
             {
-                LogToCsLog("Monitor and standby timeouts set to zero.");
+                LogToCsLog("Monitor and standby timeouts set to zero.\n");
                 QueryPowerSettings();
             }
         }
@@ -764,11 +764,11 @@ namespace CS_SAS_Staging
 
             if (result.Contains("Invalid Parameters -- try \"/?\" for help"))
             {
-                LogToCsLog("Power Plan: High Performance not found");
+                LogToCsLog("Power Plan: High Performance not found.\n");
             }
             else
             {
-                LogToCsLog("Power Plan: Set to High Performance");
+                LogToCsLog("Power Plan: Set to High Performance.\n");
                 QueryPowerSettings();
             }
         }
