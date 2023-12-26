@@ -869,6 +869,13 @@ namespace CS_SAS_Staging
         {
             MenuStrip.MsConfig();
         }
+        private void aboutLaunch_Click(object sender, EventArgs e)
+        {
+            using (var About  = new About())
+            {
+                About.ShowDialog();
+            }
+        }
         
         #endregion
     }

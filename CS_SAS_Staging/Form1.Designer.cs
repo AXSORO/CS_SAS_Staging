@@ -49,7 +49,7 @@
             devmgmtLaunch = new ToolStripMenuItem();
             msconfigLaunch = new ToolStripMenuItem();
             helpToolStripMenuItem = new ToolStripMenuItem();
-            aboutToolStripMenuItem = new ToolStripMenuItem();
+            aboutLaunch = new ToolStripMenuItem();
             tabMain = new TabControl();
             tabNwMenu = new TabPage();
             cHostName = new Label();
@@ -282,16 +282,17 @@
             // 
             // helpToolStripMenuItem
             // 
-            helpToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { aboutToolStripMenuItem });
+            helpToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { aboutLaunch });
             helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             helpToolStripMenuItem.Size = new Size(44, 20);
             helpToolStripMenuItem.Text = "Help";
             // 
-            // aboutToolStripMenuItem
+            // aboutLaunch
             // 
-            aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            aboutToolStripMenuItem.Size = new Size(105, 22);
-            aboutToolStripMenuItem.Text = "about";
+            aboutLaunch.Name = "aboutLaunch";
+            aboutLaunch.Size = new Size(180, 22);
+            aboutLaunch.Text = "about";
+            aboutLaunch.Click += aboutLaunch_Click;
             // 
             // tabMain
             // 
@@ -1184,7 +1185,7 @@
         private ToolStripMenuItem perfmonLaunch;
         private ToolStripMenuItem devmgmtLaunch;
         private ToolStripMenuItem msconfigLaunch;
-        private ToolStripMenuItem aboutToolStripMenuItem;
+        private ToolStripMenuItem aboutLaunch;
         private TabControl tabMain;
         private TabPage tabNwMenu;
         private TabPage tabAppMenu;

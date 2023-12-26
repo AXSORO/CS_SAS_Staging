@@ -59,5 +59,15 @@ namespace CS_SAS_Staging.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap WinObj {
+            get {
+                object obj = ResourceManager.GetObject("WinObj", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }
