@@ -827,5 +827,49 @@ namespace CS_SAS_Staging
 
         }
         // WIP or unused
+        #region ToolStripMenu Click Events
+        
+        private void lusrmgrLaunch_Click(object sender, EventArgs e)
+        {
+            MenuStrip.LusrMgr();
+        }
+        private void controlUpdateLaunch_Click(object sender, EventArgs e)
+        {
+            MenuStrip.ControlUpdate();
+        }
+        private void gpeditLaunch_Click(object sender, EventArgs e)
+        {
+            MenuStrip.GpEdit();
+        }
+        private void diskmgmtLaunch_Click(object sender, EventArgs e)
+        {
+            MenuStrip.DiskMgmt();
+        }
+        private void eventvwrLaunch_Click(object sender, EventArgs e)
+        {
+            MenuStrip.EventViewer();
+        }
+        private void psLaunch_Click(object sender, EventArgs e)
+        {
+            MenuStrip.OpenPowershell();
+        }
+        private void cmdLaunch_Click(object sender, EventArgs e)
+        {
+            MenuStrip.OpenCMD();
+        }
+        private void perfmonLaunch_Click(object sender, EventArgs e)
+        {
+            MenuStrip.PerfMon();
+        }
+        private void devmgmtLaunch_Click(object sender, EventArgs e)
+        {
+            MenuStrip.DevMgmt();
+        }
+        private void msconfigLaunch_Click(object sender, EventArgs e)
+        {
+            MenuStrip.MsConfig();
+        }
+        
+        #endregion
     }
 }

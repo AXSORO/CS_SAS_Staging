@@ -35,19 +35,19 @@
             tsPsStatLabel = new ToolStripStatusLabel();
             menuStrip1 = new System.Windows.Forms.MenuStrip();
             fileToolStripMenuItem = new ToolStripMenuItem();
-            saveReportToolStripMenuItem = new ToolStripMenuItem();
+            saveReport = new ToolStripMenuItem();
             shellToolStripMenuItem = new ToolStripMenuItem();
-            openPSWindowToolStripMenuItem = new ToolStripMenuItem();
-            openCMDWindowToolStripMenuItem = new ToolStripMenuItem();
+            psLaunch = new ToolStripMenuItem();
+            cmdLaunch = new ToolStripMenuItem();
             windowsToolStripMenuItem = new ToolStripMenuItem();
-            localUserManagerToolStripMenuItem = new ToolStripMenuItem();
-            windowsUpdateToolStripMenuItem = new ToolStripMenuItem();
-            groupPolicyEditorToolStripMenuItem = new ToolStripMenuItem();
-            diskManagementToolStripMenuItem = new ToolStripMenuItem();
-            eventVirewToolStripMenuItem = new ToolStripMenuItem();
-            performanceMonitorToolStripMenuItem = new ToolStripMenuItem();
-            controlPanelOptionsToolStripMenuItem = new ToolStripMenuItem();
-            mSConfigToolStripMenuItem = new ToolStripMenuItem();
+            lusrmgrLaunch = new ToolStripMenuItem();
+            controlUpdateLaunch = new ToolStripMenuItem();
+            gpeditLaunch = new ToolStripMenuItem();
+            diskmgmtLaunch = new ToolStripMenuItem();
+            eventvwrLaunch = new ToolStripMenuItem();
+            perfmonLaunch = new ToolStripMenuItem();
+            devmgmtLaunch = new ToolStripMenuItem();
+            msconfigLaunch = new ToolStripMenuItem();
             helpToolStripMenuItem = new ToolStripMenuItem();
             aboutToolStripMenuItem = new ToolStripMenuItem();
             tabMain = new TabControl();
@@ -185,91 +185,91 @@
             // 
             // fileToolStripMenuItem
             // 
-            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { saveReportToolStripMenuItem });
+            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { saveReport });
             fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             fileToolStripMenuItem.Size = new Size(37, 20);
             fileToolStripMenuItem.Text = "File";
             // 
-            // saveReportToolStripMenuItem
+            // saveReport
             // 
-            saveReportToolStripMenuItem.Name = "saveReportToolStripMenuItem";
-            saveReportToolStripMenuItem.Size = new Size(180, 22);
-            saveReportToolStripMenuItem.Text = "Save Report";
+            saveReport.Name = "saveReport";
+            saveReport.Size = new Size(180, 22);
+            saveReport.Text = "Save Report";
             // 
             // shellToolStripMenuItem
             // 
-            shellToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { openPSWindowToolStripMenuItem, openCMDWindowToolStripMenuItem });
+            shellToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { psLaunch, cmdLaunch });
             shellToolStripMenuItem.Name = "shellToolStripMenuItem";
             shellToolStripMenuItem.Size = new Size(44, 20);
             shellToolStripMenuItem.Text = "Shell";
             // 
-            // openPSWindowToolStripMenuItem
+            // psLaunch
             // 
-            openPSWindowToolStripMenuItem.Name = "openPSWindowToolStripMenuItem";
-            openPSWindowToolStripMenuItem.Size = new Size(180, 22);
-            openPSWindowToolStripMenuItem.Text = "Open P/S Window";
+            psLaunch.Name = "psLaunch";
+            psLaunch.Size = new Size(180, 22);
+            psLaunch.Text = "Open P/S Window";
             // 
-            // openCMDWindowToolStripMenuItem
+            // cmdLaunch
             // 
-            openCMDWindowToolStripMenuItem.Name = "openCMDWindowToolStripMenuItem";
-            openCMDWindowToolStripMenuItem.Size = new Size(180, 22);
-            openCMDWindowToolStripMenuItem.Text = "Open CMD Window";
+            cmdLaunch.Name = "cmdLaunch";
+            cmdLaunch.Size = new Size(180, 22);
+            cmdLaunch.Text = "Open CMD Window";
             // 
             // windowsToolStripMenuItem
             // 
-            windowsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { localUserManagerToolStripMenuItem, windowsUpdateToolStripMenuItem, groupPolicyEditorToolStripMenuItem, diskManagementToolStripMenuItem, eventVirewToolStripMenuItem, performanceMonitorToolStripMenuItem, controlPanelOptionsToolStripMenuItem, mSConfigToolStripMenuItem });
+            windowsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { lusrmgrLaunch, controlUpdateLaunch, gpeditLaunch, diskmgmtLaunch, eventvwrLaunch, perfmonLaunch, devmgmtLaunch, msconfigLaunch });
             windowsToolStripMenuItem.Name = "windowsToolStripMenuItem";
             windowsToolStripMenuItem.Size = new Size(68, 20);
             windowsToolStripMenuItem.Text = "Windows";
             // 
-            // localUserManagerToolStripMenuItem
+            // lusrmgrLaunch
             // 
-            localUserManagerToolStripMenuItem.Name = "localUserManagerToolStripMenuItem";
-            localUserManagerToolStripMenuItem.Size = new Size(188, 22);
-            localUserManagerToolStripMenuItem.Text = "Local User Manager";
+            lusrmgrLaunch.Name = "lusrmgrLaunch";
+            lusrmgrLaunch.Size = new Size(188, 22);
+            lusrmgrLaunch.Text = "Local User Manager";
             // 
-            // windowsUpdateToolStripMenuItem
+            // controlUpdateLaunch
             // 
-            windowsUpdateToolStripMenuItem.Name = "windowsUpdateToolStripMenuItem";
-            windowsUpdateToolStripMenuItem.Size = new Size(188, 22);
-            windowsUpdateToolStripMenuItem.Text = "Windows Update";
+            controlUpdateLaunch.Name = "controlUpdateLaunch";
+            controlUpdateLaunch.Size = new Size(188, 22);
+            controlUpdateLaunch.Text = "Windows Update";
             // 
-            // groupPolicyEditorToolStripMenuItem
+            // gpeditLaunch
             // 
-            groupPolicyEditorToolStripMenuItem.Name = "groupPolicyEditorToolStripMenuItem";
-            groupPolicyEditorToolStripMenuItem.Size = new Size(188, 22);
-            groupPolicyEditorToolStripMenuItem.Text = "Group Policy Editor";
+            gpeditLaunch.Name = "gpeditLaunch";
+            gpeditLaunch.Size = new Size(188, 22);
+            gpeditLaunch.Text = "Group Policy Editor";
             // 
-            // diskManagementToolStripMenuItem
+            // diskmgmtLaunch
             // 
-            diskManagementToolStripMenuItem.Name = "diskManagementToolStripMenuItem";
-            diskManagementToolStripMenuItem.Size = new Size(188, 22);
-            diskManagementToolStripMenuItem.Text = "Disk Management";
+            diskmgmtLaunch.Name = "diskmgmtLaunch";
+            diskmgmtLaunch.Size = new Size(188, 22);
+            diskmgmtLaunch.Text = "Disk Management";
             // 
-            // eventVirewToolStripMenuItem
+            // eventvwrLaunch
             // 
-            eventVirewToolStripMenuItem.Name = "eventVirewToolStripMenuItem";
-            eventVirewToolStripMenuItem.Size = new Size(188, 22);
-            eventVirewToolStripMenuItem.Text = "Event Viewer";
-            eventVirewToolStripMenuItem.Click += eventVirewToolStripMenuItem_Click;
+            eventvwrLaunch.Name = "eventvwrLaunch";
+            eventvwrLaunch.Size = new Size(188, 22);
+            eventvwrLaunch.Text = "Event Viewer";
+            eventvwrLaunch.Click += eventVirewToolStripMenuItem_Click;
             // 
-            // performanceMonitorToolStripMenuItem
+            // perfmonLaunch
             // 
-            performanceMonitorToolStripMenuItem.Name = "performanceMonitorToolStripMenuItem";
-            performanceMonitorToolStripMenuItem.Size = new Size(188, 22);
-            performanceMonitorToolStripMenuItem.Text = "Performance Monitor";
+            perfmonLaunch.Name = "perfmonLaunch";
+            perfmonLaunch.Size = new Size(188, 22);
+            perfmonLaunch.Text = "Performance Monitor";
             // 
-            // controlPanelOptionsToolStripMenuItem
+            // devmgmtLaunch
             // 
-            controlPanelOptionsToolStripMenuItem.Name = "controlPanelOptionsToolStripMenuItem";
-            controlPanelOptionsToolStripMenuItem.Size = new Size(188, 22);
-            controlPanelOptionsToolStripMenuItem.Text = "Device Manager";
+            devmgmtLaunch.Name = "devmgmtLaunch";
+            devmgmtLaunch.Size = new Size(188, 22);
+            devmgmtLaunch.Text = "Device Manager";
             // 
-            // mSConfigToolStripMenuItem
+            // msconfigLaunch
             // 
-            mSConfigToolStripMenuItem.Name = "mSConfigToolStripMenuItem";
-            mSConfigToolStripMenuItem.Size = new Size(188, 22);
-            mSConfigToolStripMenuItem.Text = "MSConfig";
+            msconfigLaunch.Name = "msconfigLaunch";
+            msconfigLaunch.Size = new Size(188, 22);
+            msconfigLaunch.Text = "MSConfig";
             // 
             // helpToolStripMenuItem
             // 
@@ -1163,18 +1163,18 @@
         private ToolStripMenuItem fileToolStripMenuItem;
         private ToolStripMenuItem shellToolStripMenuItem;
         private ToolStripMenuItem windowsToolStripMenuItem;
-        private ToolStripMenuItem localUserManagerToolStripMenuItem;
-        private ToolStripMenuItem windowsUpdateToolStripMenuItem;
-        private ToolStripMenuItem groupPolicyEditorToolStripMenuItem;
-        private ToolStripMenuItem diskManagementToolStripMenuItem;
+        private ToolStripMenuItem lusrmgrLaunch;
+        private ToolStripMenuItem controlUpdateLaunch;
+        private ToolStripMenuItem gpeditLaunch;
+        private ToolStripMenuItem diskmgmtLaunch;
         private ToolStripMenuItem helpToolStripMenuItem;
-        private ToolStripMenuItem eventVirewToolStripMenuItem;
-        private ToolStripMenuItem saveReportToolStripMenuItem;
-        private ToolStripMenuItem openPSWindowToolStripMenuItem;
-        private ToolStripMenuItem openCMDWindowToolStripMenuItem;
-        private ToolStripMenuItem performanceMonitorToolStripMenuItem;
-        private ToolStripMenuItem controlPanelOptionsToolStripMenuItem;
-        private ToolStripMenuItem mSConfigToolStripMenuItem;
+        private ToolStripMenuItem eventvwrLaunch;
+        private ToolStripMenuItem saveReport;
+        private ToolStripMenuItem psLaunch;
+        private ToolStripMenuItem cmdLaunch;
+        private ToolStripMenuItem perfmonLaunch;
+        private ToolStripMenuItem devmgmtLaunch;
+        private ToolStripMenuItem msconfigLaunch;
         private ToolStripMenuItem aboutToolStripMenuItem;
         private TabControl tabMain;
         private TabPage tabNwMenu;
