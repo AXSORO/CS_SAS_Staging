@@ -96,6 +96,7 @@
             panel3 = new Panel();
             panel4 = new Panel();
             tabWinMenu = new TabPage();
+            button1 = new Button();
             scriptWindowsUpdate = new Button();
             controlWindowsUpdate = new Button();
             panel7 = new Panel();
@@ -134,7 +135,6 @@
             panel6 = new Panel();
             psLogWindow = new Label();
             csLogClear = new Button();
-            button1 = new Button();
             statusStrip1.SuspendLayout();
             menuStrip1.SuspendLayout();
             tabMain.SuspendLayout();
@@ -194,7 +194,7 @@
             // saveReportToolStripMenuItem
             // 
             saveReportToolStripMenuItem.Name = "saveReportToolStripMenuItem";
-            saveReportToolStripMenuItem.Size = new Size(180, 22);
+            saveReportToolStripMenuItem.Size = new Size(136, 22);
             saveReportToolStripMenuItem.Text = "Save Report";
             // 
             // shellToolStripMenuItem
@@ -778,6 +778,15 @@
             tabWinMenu.UseVisualStyleBackColor = true;
             tabWinMenu.Click += tabWinMenu_Click;
             // 
+            // button1
+            // 
+            button1.Location = new Point(7, 385);
+            button1.Name = "button1";
+            button1.Size = new Size(179, 23);
+            button1.TabIndex = 72;
+            button1.Text = "Re-Run Query";
+            button1.UseVisualStyleBackColor = true;
+            // 
             // scriptWindowsUpdate
             // 
             scriptWindowsUpdate.Location = new Point(199, 367);
@@ -973,6 +982,7 @@
             disableRDP.TabIndex = 46;
             disableRDP.Text = "Disable";
             disableRDP.UseVisualStyleBackColor = true;
+            disableRDP.Click += disableRDP_Click;
             // 
             // enableRDP
             // 
@@ -982,6 +992,7 @@
             enableRDP.TabIndex = 45;
             enableRDP.Text = "Enable";
             enableRDP.UseVisualStyleBackColor = true;
+            enableRDP.Click += enableRDP_Click;
             // 
             // label12
             // 
@@ -1121,15 +1132,6 @@
             csLogClear.Text = "Clear Log";
             csLogClear.UseVisualStyleBackColor = true;
             csLogClear.Click += csLogClear_Click;
-            // 
-            // button1
-            // 
-            button1.Location = new Point(7, 385);
-            button1.Name = "button1";
-            button1.Size = new Size(179, 23);
-            button1.TabIndex = 72;
-            button1.Text = "Re-Run Query";
-            button1.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 

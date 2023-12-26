@@ -47,6 +47,47 @@ namespace CS_SAS_Staging
                 }
             });
         }
+        public static async Task ChgRemoteAccessAsync(bool enableRDP, Logger logger)
+        {
+            string value = enableRDP ? "0" : "1"; // 0 to enable RDP, 1 to disable
+            string command = $"reg add \"HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\" /v fDenyTSConnections /t REG_DWORD /d {value} /f";
+
+            await Task.Run(() =>
+            {
+                ProcessStartInfo startInfo = new ProcessStartInfo
+                {
+                    FileName = "cmd.exe",
+                    Arguments = "/c " + command,
+                    UseShellExecute = false,
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true,
+                    CreateNoWindow = true
+                };
+
+                using (Process process = new Process())
+                {
+                    process.StartInfo = startInfo;
+                    process.Start();
+
+                    string output = process.StandardOutput.ReadToEnd();
+                    string error = process.StandardError.ReadToEnd();
+                    process.WaitForExit();
+
+                    if (!string.IsNullOrEmpty(error))
+                    {
+                        logger?.Invoke($"Error changing RDP setting: {error}");
+                    }
+                    else
+                    {
+                        string status = enableRDP ? "enabled" : "disabled";
+                        logger?.Invoke($"Remote Access: RDP successfully {status}.\n");
+                    }
+                }
+            });
+        }
+
+        public delegate void Logger(string message);
     }
 }
+
 

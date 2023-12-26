@@ -805,6 +805,16 @@ namespace CS_SAS_Staging
             }
         }
         // invoked when changing power settings
+        private async void enableRDP_Click(object sender, EventArgs e)
+        {
+            await CheckRemoteAccess.ChgRemoteAccessAsync(true, LogToCsLog);
+            await CheckRemoteAccess.CheckRDPStatusAsync(rdpSetQuery);
+        }
+        private async void disableRDP_Click(object sender, EventArgs e)
+        {
+            await CheckRemoteAccess.ChgRemoteAccessAsync(false, LogToCsLog);
+            await CheckRemoteAccess.CheckRDPStatusAsync(rdpSetQuery);
+        }
         private void pwrLabel_Click(object sender, EventArgs e)
         {
 
