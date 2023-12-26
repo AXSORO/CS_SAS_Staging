@@ -57,42 +57,43 @@ namespace CS_SAS_Staging
         private string GetActivePowerScheme()
         {
             string output = ExecutePowerCfgCommand("-getactivescheme");
-            Regex regex = new Regex(@"Power Scheme GUID: (?<guid>.+)  \(.*\)\s+Name: (?<name>.+)\s+", RegexOptions.Multiline);
+            Regex regex = new Regex(@"Power Scheme GUID: .+  \((?<name>.+)\)");
             Match match = regex.Match(output);
 
             if (match.Success)
             {
-                return $"{match.Groups["name"].Value.Trim()} (GUID: {match.Groups["guid"].Value.Trim()})";
+                return match.Groups["name"].Value.Trim();
             }
 
-            return "Error: No Data";
+            return "Error: Data Parse Failure";
         }
 
         private string GetScreenTimeout()
         {
-            string output = ExecutePowerCfgCommand("-query SCHEME_CURRENT SUB_VIDEO VIDEOIDLE"); // GUIDs may vary
-            return ParseSetting(output, "VIDEOIDLE");
+            string output = ExecutePowerCfgCommand("-query SCHEME_CURRENT SUB_VIDEO VIDEOIDLE");
+            return ParseSetting(output, "Power Setting GUID: 3c0bc021-c8a8-4e07-a973-6b14cbcb2b7e");
         }
 
         private string GetSleepTimeout()
         {
-            string output = ExecutePowerCfgCommand("-query SCHEME_CURRENT SUB_SLEEP STANDBYIDLE"); // GUIDs may vary
-            return ParseSetting(output, "STANDBYIDLE");
+            string output = ExecutePowerCfgCommand("-query SCHEME_CURRENT SUB_SLEEP STANDBYIDLE");
+            return ParseSetting(output, "Power Setting GUID: 29f6c1db-86da-48c5-9fdb-f2b67b1f44da");
         }
 
         private string ParseSetting(string output, string settingName)
         {
-            Regex regex = new Regex(settingName + @"\s+\(.*\)\s+\s+Power Setting Index: (?<value>\d+)", RegexOptions.Multiline);
+            // Adjust the regex to match the 'Current AC Power Setting Index' line
+            Regex regex = new Regex(settingName + @"[\s\S]+?Current AC Power Setting Index: (?<value>\d+)");
             Match match = regex.Match(output);
 
             if (match.Success)
             {
-                int seconds = int.Parse(match.Groups["value"].Value);
+                int seconds = int.Parse(match.Groups["value"].Value, System.Globalization.NumberStyles.HexNumber);
                 TimeSpan time = TimeSpan.FromSeconds(seconds);
                 return time.ToString(@"hh\:mm\:ss");
             }
 
-            return "Error: No Data";
+            return "Error: Data Parse Failure";
         }
     }
 }
