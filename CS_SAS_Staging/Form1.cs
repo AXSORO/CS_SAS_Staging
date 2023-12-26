@@ -359,7 +359,7 @@ namespace CS_SAS_Staging
             try
             {
                 LogToCsLog("Query: Power Settings\n");
-                PowerCfgUtility configUtility = new PowerCfgUtility();
+                PowerCfgUtility configUtility = new PowerCfgUtility(LogToCsLog);
                 string jsonOutput = configUtility.GetPowerSettings();
                 var powerSettings = JsonConvert.DeserializeObject<Dictionary<string, string>>(jsonOutput);
 

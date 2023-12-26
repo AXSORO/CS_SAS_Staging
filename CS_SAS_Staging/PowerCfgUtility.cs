@@ -11,6 +11,12 @@ namespace CS_SAS_Staging
 {
     internal class PowerCfgUtility
     {
+        public delegate void Logger(string message);
+        private readonly Logger _logger;
+        public PowerCfgUtility(Logger logger)
+        {
+            _logger = logger;
+        }
         public string GetPowerSettings()
         {
             string activePowerScheme = GetActivePowerScheme();
@@ -26,7 +32,6 @@ namespace CS_SAS_Staging
 
             return JsonConvert.SerializeObject(settings, Newtonsoft.Json.Formatting.Indented);
         }
-
         private string ExecutePowerCfgCommand(string arguments)
         {
             ProcessStartInfo startInfo = new ProcessStartInfo
@@ -53,7 +58,6 @@ namespace CS_SAS_Staging
                 return output.ToString();
             }
         }
-
         private string GetActivePowerScheme()
         {
             string output = ExecutePowerCfgCommand("-getactivescheme");
@@ -67,33 +71,44 @@ namespace CS_SAS_Staging
 
             return "Error: Data Parse Failure";
         }
-
         private string GetScreenTimeout()
         {
             string output = ExecutePowerCfgCommand("-query SCHEME_CURRENT SUB_VIDEO VIDEOIDLE");
             return ParseSetting(output, "Power Setting GUID: 3c0bc021-c8a8-4e07-a973-6b14cbcb2b7e");
         }
-
         private string GetSleepTimeout()
         {
             string output = ExecutePowerCfgCommand("-query SCHEME_CURRENT SUB_SLEEP STANDBYIDLE");
             return ParseSetting(output, "Power Setting GUID: 29f6c1db-86da-48c5-9fdb-f2b67b1f44da");
         }
-
         private string ParseSetting(string output, string settingName)
         {
-            Regex regex = new Regex(settingName + @"[\s\S]+?Current AC Power Setting Index: (?<value>\d+)");
+            Regex regex = new Regex(settingName + @"[\s\S]*?Current AC Power Setting Index:\s*(?<value>0x[0-9A-Fa-f]+)");
             Match match = regex.Match(output);
 
             if (match.Success)
             {
-                int seconds = int.Parse(match.Groups["value"].Value, System.Globalization.NumberStyles.HexNumber);
+                string hexValue = match.Groups["value"].Value.Trim();
 
-                // Convert seconds into a user-friendly format
-                return ConvertSecondsToFriendlyDuration(seconds);
+                try
+                {
+                    int seconds = Convert.ToInt32(hexValue, 16);  // Parsing the hexadecimal value
+                    if (seconds == 0)
+                    {
+                        return "Never";
+                    }
+                    return ConvertSecondsToFriendlyDuration(seconds);
+                }
+                catch (FormatException ex)
+                {
+                    _logger?.Invoke($"FormatException: Unable to parse '{hexValue}'. Error: {ex.Message}");
+                    return "Error: Parsing Failed";
+                }
             }
-
-            return "Error: No Data";
+            else
+            {
+                return "Error: No Data";
+            }
         }
         private string ConvertSecondsToFriendlyDuration(int seconds)
         {
